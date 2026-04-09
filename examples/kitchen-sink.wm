@@ -1,0 +1,189 @@
+---
+title: WikiMark Kitchen Sink
+author: WikiMark Project
+date: 2026-04-08
+radius_km: 6371
+classification: Terrestrial
+star:
+  name: Sol
+  type: G2V
+moons:
+  - Luna
+categories:
+  - Examples
+  - WikiMark
+tags:
+  - demo
+  - test
+toc: true
+inputs:
+  subtitle:
+    default: "A comprehensive test document"
+---
+
+# ${title}
+
+${subtitle}
+
+## Frontmatter Variables
+
+- Title: ${title}
+- Author: ${author}
+- Radius: ${radius_km} km
+- Classification: ${classification}
+- Star name: ${star.name}
+- Star type: ${star.type}
+- Primary moon: ${moons.0}
+- Default subtitle: ${inputs.subtitle.default}
+- Escaped: \${not_a_variable}
+
+## Wiki Links
+
+- Basic: [[Main Page]]
+- Piped: [[Main Page|home]]
+- Namespace: [[Help:Editing]]
+- Interwiki: [[wikipedia:Markdown]]
+- With emphasis: [[Main Page|go **home**]]
+- Escaped: \[\[not a link]]
+- In code: `[[not a link]]`
+
+## Images and Media
+
+Basic Markdown image:
+![A sunset](photo.jpg)
+
+With presentation attributes:
+![A sunset](photo.jpg){width=300}
+![A sunset](photo.jpg){.thumb .align-right width=300}
+![Sunset over ocean](photo.jpg){.thumb caption="A beautiful sunset"}
+![A sunset](photo.jpg){#hero-image .border}
+
+With semantic annotations:
+![Sunset](photo.jpg){.thumb}|subject=sunset location=Malibu|
+![Logo](logo.png)|brand="WikiMark"|
+
+## Page Embeds
+
+Full page: ![[greeting]]
+Section embed: ![[Main Page#History]]
+
+## Callouts
+
+> [!NOTE]
+> This is a note with [[wiki links]] and ${title}.
+
+> [!WARNING] Important warning
+> Do not ignore this.
+
+> [!TIP]
+> Use `${variables}` and **formatting** in callouts.
+
+## Templates
+
+Basic: {{greeting}}
+Positional: {{greeting "Alice"}}
+Named: {{greeting name="Alice"}}
+Mixed: {{user-card "Alice" role="admin"}}
+Nested: {{outer {{inner}}}}
+
+## Semantic Annotations
+
+The capital is [Paris]|capital|.
+Population: [67.39 million]|property=population value=67390000|.
+Founded: [1789-07-14]|property=founded type=Date|.
+Speaks [English]|language| and [French]|language|.
+
+On wiki links: [[Paris]]|capital|
+On regular links: [Paris](https://en.wikipedia.org/wiki/Paris)|capital|
+
+With styling: [Paris]{.highlight}|capital|
+Multiple properties: [Paris]|capital country=France population=2161000|
+
+Silent annotation: []|category-type="Sovereign state"|
+
+## GFM Features (unchanged)
+
+### Tables
+
+| Name | Value |
+| --- | --- |
+| [[Page|display]] | 42 |
+| normal | **bold** |
+
+### Tables with semantic data (escaped pipes)
+
+| City | Role |
+| --- | --- |
+| [Paris]\|capital\| | Government |
+
+### Task Lists
+
+- [x] Wiki links
+- [x] Templates
+- [x] Semantic annotations
+- [ ] More examples
+
+### Footnotes
+
+WikiMark uses GFM footnotes[^1] instead of MediaWiki ref tags[^mw].
+
+[^1]: This is a footnote.
+[^mw]: MediaWiki uses `<ref>` tags, but WikiMark uses existing GFM syntax.
+
+### Strikethrough
+
+~~deprecated feature~~
+
+### Code
+
+```python
+# Wiki links are not parsed in code blocks
+link = "[[Not a link]]"
+template = "{{Not a template}}"
+variable = "${Not a variable}"
+```
+
+## Stress Tests
+
+### Dollar sign is not special alone
+- The cost is $50 and ${title} is the page.
+- Math: $x^{2} + y^{2} = r^{2}$ (not parsed as variables)
+
+### Modifiers on wiki links
+- Styled wiki link: [[Paris]]{.highlight}
+- Semantic wiki link: [[Paris]]|capital|
+- Both: [[Paris]]{.highlight}|capital|
+
+### Multiple attribute blocks (merged)
+- ![photo](img.jpg){.thumb}{.border width=300}
+
+### Template output with semantic annotation
+- {{greeting}}|type=salutation|
+
+### Quoted values with delimiters
+- {{template arg="value with }} inside"}}
+- ![alt](img.jpg){caption="photo} nice"}
+- [text]{.highlight}|property="a|b"|
+
+### No links inside links
+- [click [[here]]](https://example.com)
+
+### Bare [text] behavior
+- [just text] alone is literal
+- [span]{.highlight} with brackets is a span
+- [annotated]|property| with brackets is semantic
+
+## Edge Cases
+
+- Unclosed wiki link: [[unclosed
+- Unclosed template: {{unclosed
+- Unclosed variable: ${unclosed
+- Unclosed attribute: ![alt](img.jpg){unclosed
+- Empty wiki link: [[]]
+- Empty variable: ${}
+- Adjacent links: [[Alpha]][[Beta]]
+- Whitespace normalization: [[  Main   Page  ]]
+- Underscore equivalence: [[Main_Page]]
+- Case normalization: [[main page]]
+- Standalone pipes are just text: | this | is | fine |
+- [text]| is literal (no paired bracket)
