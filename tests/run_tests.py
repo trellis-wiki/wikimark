@@ -111,6 +111,8 @@ def main():
     parser.add_argument("--verbose", action="store_true")
     parser.add_argument("--json", action="store_true")
     parser.add_argument("--normalize", action="store_true")
+    parser.add_argument("--exclude-file", default=None,
+                        help="JSON file with example numbers to exclude per suite")
     parser.add_argument("--list", action="store_true")
     args = parser.parse_args()
 
@@ -128,6 +130,22 @@ def main():
             print(f"Available: {', '.join(SUITE_FILES.keys())}", file=sys.stderr)
             sys.exit(1)
         all_tests.extend(load_suite(name))
+
+    # Apply exclusions
+    if args.exclude_file:
+        exclude_path = Path(args.exclude_file)
+        if not exclude_path.is_absolute():
+            exclude_path = TESTS_DIR / exclude_path
+        if exclude_path.exists():
+            with open(exclude_path, encoding="utf-8") as f:
+                exclusions = json.load(f)
+            for t in list(all_tests):
+                source = t.get("source", "")
+                excluded_examples = exclusions.get(source, [])
+                if isinstance(excluded_examples, dict):
+                    excluded_examples = excluded_examples.get("baseline_divergences", [])
+                if t["example"] in excluded_examples:
+                    all_tests.remove(t)
 
     # Apply filters
     if args.section:

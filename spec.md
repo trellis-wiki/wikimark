@@ -369,7 +369,7 @@ WikiMark block or inline content:
 .
 <div class="wm-callout wm-callout-tip">
 <p class="wm-callout-title">Tip</p>
-<p>Use <a href="Wiki_links">wiki links</a> and <code>${variables}</code> in callouts.</p>
+<p>Use <a href="wiki_links">wiki links</a> and <code>${variables}</code> in callouts.</p>
 <p>They support <strong>all</strong> WikiMark features.</p>
 </div>
 ````````````````````````````````
@@ -434,7 +434,7 @@ The display text is the original link target.
 ```````````````````````````````` example
 [[hello world]]
 .
-<p><a href="Hello_world">hello world</a></p>
+<p><a href="hello_world">hello world</a></p>
 ````````````````````````````````
 
 Multiple wiki links can appear in the same paragraph:
@@ -1603,7 +1603,7 @@ are implemented as module-backed templates (see
 [section 11](#11-templates)), not as special syntax:
 
 ```````````````````````````````` example
-{{ask "[[Category:Countries]]" "?capital" limit=1}}
+{{ask source="Category:Countries" property="capital" limit=1}}
 .
 <table class="wm-query-result">
 <thead><tr><th>Page</th><th>Capital</th></tr></thead>
@@ -1642,20 +1642,18 @@ underscores. In display text, underscores SHOULD be displayed as spaces.
 <p><a href="Main_Page">Main Page</a></p>
 ````````````````````````````````
 
-### 13.3 First-letter capitalization
+### 13.3 Case preservation
 
-The first letter of a page title (after namespace prefix, if any) MUST
-be capitalized in the generated URL. The display text preserves the
-original case.
+Page titles are **case-preserving**. The case of the original text is
+maintained in the generated URL. WikiMark does not perform first-letter
+capitalization — that is a MediaWiki convention that does not fit
+Markdown's plain-text philosophy.
 
 ```````````````````````````````` example
 [[main page]]
 .
-<p><a href="Main_page">main page</a></p>
+<p><a href="main_page">main page</a></p>
 ````````````````````````````````
-
-Implementations MAY offer a case-sensitive mode that disables
-first-letter capitalization.
 
 ### 13.4 Unicode normalization
 

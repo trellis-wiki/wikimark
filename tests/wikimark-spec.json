@@ -73,7 +73,7 @@
   },
   {
     "markdown": "> [!TIP]\n> Use [[wiki links]] and `${variables}` in callouts.\n>\n> They support **all** WikiMark features.\n",
-    "html": "<div class=\"wm-callout wm-callout-tip\">\n<p class=\"wm-callout-title\">Tip</p>\n<p>Use <a href=\"Wiki_links\">wiki links</a> and <code>${variables}</code> in callouts.</p>\n<p>They support <strong>all</strong> WikiMark features.</p>\n</div>\n",
+    "html": "<div class=\"wm-callout wm-callout-tip\">\n<p class=\"wm-callout-title\">Tip</p>\n<p>Use <a href=\"wiki_links\">wiki links</a> and <code>${variables}</code> in callouts.</p>\n<p>They support <strong>all</strong> WikiMark features.</p>\n</div>\n",
     "example": 9,
     "start_line": 364,
     "end_line": 375,
@@ -91,7 +91,7 @@
   },
   {
     "markdown": "[[hello world]]\n",
-    "html": "<p><a href=\"Hello_world\">hello world</a></p>\n",
+    "html": "<p><a href=\"hello_world\">hello world</a></p>\n",
     "example": 11,
     "start_line": 434,
     "end_line": 438,
@@ -738,7 +738,7 @@
     "source": "wikimark"
   },
   {
-    "markdown": "{{ask \"[[Category:Countries]]\" \"?capital\" limit=1}}\n",
+    "markdown": "{{ask source=\"Category:Countries\" property=\"capital\" limit=1}}\n",
     "html": "<table class=\"wm-query-result\">\n<thead><tr><th>Page</th><th>Capital</th></tr></thead>\n<tbody><tr><td><a href=\"France\">France</a></td><td>Paris</td></tr></tbody>\n</table>\n",
     "example": 83,
     "start_line": 1605,
@@ -766,19 +766,19 @@
   },
   {
     "markdown": "[[main page]]\n",
-    "html": "<p><a href=\"Main_page\">main page</a></p>\n",
+    "html": "<p><a href=\"main_page\">main page</a></p>\n",
     "example": 86,
-    "start_line": 1651,
-    "end_line": 1655,
-    "section": "13.3 First-letter capitalization",
+    "start_line": 1652,
+    "end_line": 1656,
+    "section": "13.3 Case preservation",
     "source": "wikimark"
   },
   {
     "markdown": "This is [[unclosed\n",
     "html": "<p>This is [[unclosed</p>\n",
     "example": 87,
-    "start_line": 1695,
-    "end_line": 1699,
+    "start_line": 1693,
+    "end_line": 1697,
     "section": "14.1 Unclosed delimiters",
     "source": "wikimark"
   },
@@ -786,8 +786,8 @@
     "markdown": "This is {{unclosed\n",
     "html": "<p>This is {{unclosed</p>\n",
     "example": 88,
-    "start_line": 1701,
-    "end_line": 1705,
+    "start_line": 1699,
+    "end_line": 1703,
     "section": "14.1 Unclosed delimiters",
     "source": "wikimark"
   },
@@ -795,8 +795,8 @@
     "markdown": "This is ${unclosed\n",
     "html": "<p>This is ${unclosed</p>\n",
     "example": 89,
-    "start_line": 1707,
-    "end_line": 1711,
+    "start_line": 1705,
+    "end_line": 1709,
     "section": "14.1 Unclosed delimiters",
     "source": "wikimark"
   },
@@ -804,8 +804,8 @@
     "markdown": "![alt](img.jpg){unclosed\n",
     "html": "<p><img src=\"img.jpg\" alt=\"alt\" />{unclosed</p>\n",
     "example": 90,
-    "start_line": 1713,
-    "end_line": 1717,
+    "start_line": 1711,
+    "end_line": 1715,
     "section": "14.1 Unclosed delimiters",
     "source": "wikimark"
   }

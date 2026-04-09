@@ -17,7 +17,7 @@
   },
   {
     "markdown": "[[a b c d e]]\n",
-    "html": "<p><a href=\"A_b_c_d_e\">a b c d e</a></p>\n",
+    "html": "<p><a href=\"a_b_c_d_e\">a b c d e</a></p>\n",
     "example": 3,
     "section": "Wiki links — normalization",
     "source": "wikimark-extra",
@@ -25,7 +25,7 @@
   },
   {
     "markdown": "[[  leading]]\n",
-    "html": "<p><a href=\"Leading\">leading</a></p>\n",
+    "html": "<p><a href=\"leading\">leading</a></p>\n",
     "example": 4,
     "section": "Wiki links — normalization",
     "source": "wikimark-extra",
@@ -33,7 +33,7 @@
   },
   {
     "markdown": "[[trailing  ]]\n",
-    "html": "<p><a href=\"Trailing\">trailing</a></p>\n",
+    "html": "<p><a href=\"trailing\">trailing</a></p>\n",
     "example": 5,
     "section": "Wiki links — normalization",
     "source": "wikimark-extra",
