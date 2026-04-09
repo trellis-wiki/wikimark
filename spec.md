@@ -10,18 +10,21 @@ WikiMark is a markup language that extends [GitHub Flavored Markdown][GFM]
 with wiki-oriented features including wiki links, templates, semantic
 annotations, page-level variables, and structured page metadata.
 
-WikiMark is a **strict superset** of GFM. Every conforming GFM document
-is a conforming WikiMark document, and a conforming WikiMark processor
-MUST produce output identical to a conforming GFM processor for any input
-that contains no WikiMark extensions.
+WikiMark is a **superset** of GFM with one intentional behavioral
+change (see [section 1.3](#13-relationship-to-gfm)). Every valid GFM
+document is parseable by WikiMark. For documents that contain no
+WikiMark extensions and no relative links, a conforming WikiMark
+processor produces output identical to a conforming GFM processor.
 
 [GFM]: https://github.github.com/gfm/
 
 ### 1.2 Design principles
 
-1. **Strict superset.** WikiMark MUST NOT change the meaning of any valid
-   GFM construct. All extensions use syntax that has no defined meaning
-   in GFM.
+1. **Near-superset.** WikiMark extensions use syntax that has no defined
+   meaning in GFM (`[[...]]`, `{{...}}`, `${...}`, `{key=value}`,
+   `|...|`). The one exception is relative links: `[text](target)`
+   without a URI scheme is treated as a wiki page link rather than a
+   filesystem path (see [section 1.3](#13-relationship-to-gfm)).
 
 2. **GFM first.** Where GFM already provides a feature, WikiMark uses it
    as-is. For example, WikiMark uses GFM footnotes (`[^id]`) for
@@ -70,18 +73,31 @@ WikiMark adds new syntax in positions that are unambiguous in GFM:
   meaning (`|` is only meaningful at the block level for tables).
 - YAML frontmatter (`---` delimited) is widely supported but not part of
   the GFM spec; it has no GFM meaning.
-WikiMark redefines the behavior of one GFM construct:
+#### 1.3.1 The relative link deviation
+
+WikiMark changes the meaning of one GFM construct:
 
 - **Relative links.** In GFM, `[text](target)` where `target` has no
-  URI scheme creates a relative filesystem link. In WikiMark, such links
-  are **wiki page links**: the target is a page name within the wiki's
-  namespace. There are no relative filesystem links in a wiki context —
-  the wiki namespace is the context. Links with an RFC 3986 scheme
-  (`https:`, `mailto:`, etc.), fragment anchors (`#`), or explicit
-  path prefixes (`/`, `./`, `../`) retain their standard GFM meaning.
+  URI scheme creates a relative filesystem path. In WikiMark, such links
+  are **wiki page links**: the target is treated as a page name within
+  the wiki's namespace and normalized accordingly (spaces become
+  underscores). There are no relative filesystem links in a wiki
+  context — the wiki namespace is the only context.
 
-This is the only intentional deviation from GFM behavior. All other GFM
-constructs are preserved unchanged.
+Links that match any of the following are **not** affected and retain
+their standard GFM behavior:
+
+- URI scheme present: `https:`, `http:`, `mailto:`, `tel:`, `ftp:`, etc.
+- Fragment anchor: `#section`
+- Absolute path: `/path/to/page`
+- Explicit relative path: `./file` or `../file`
+- URL contains a space (from angle-bracket link definitions)
+
+This is the **only** intentional deviation from GFM. All other GFM
+constructs produce identical output. WikiMark extensions (`[[...]]`,
+`{{...}}`, `${...}`, `{key=value}`, `|...|`, YAML frontmatter) all use
+syntax that has no defined meaning in GFM, so they do not conflict with
+any existing GFM document.
 
 ### 1.4 Conventions
 

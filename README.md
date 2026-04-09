@@ -1,6 +1,6 @@
 # WikiMark
 
-A strict superset of [GitHub Flavored Markdown](https://github.github.com/gfm/) that adds wiki functionality.
+A superset of [GitHub Flavored Markdown](https://github.github.com/gfm/) that adds wiki functionality. WikiMark extends GFM with wiki links, templates, semantic annotations, and page metadata. All GFM syntax works unchanged except for one intentional deviation: relative links (`[text](target)` without a URI scheme) are treated as wiki page links.
 
 ## Status
 
@@ -8,7 +8,7 @@ A strict superset of [GitHub Flavored Markdown](https://github.github.com/gfm/) 
 
 ## Design Principles
 
-1. **Strict GFM superset.** Every valid GFM document is valid WikiMark with identical output.
+1. **GFM superset.** Every valid GFM document is valid WikiMark. Output is identical except that relative links are treated as wiki page links.
 2. **GFM first.** Use existing GFM features (footnotes, tables, images) as-is.
 3. **Adopt established conventions.** YAML frontmatter, Pandoc attributes, Obsidian-style wiki links.
 4. **Templates as the extension mechanism.** No built-in parser functions — extend via modules.
