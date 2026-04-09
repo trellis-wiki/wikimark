@@ -10,11 +10,11 @@ WikiMark is a markup language that extends [GitHub Flavored Markdown][GFM]
 with wiki-oriented features including wiki links, templates, semantic
 annotations, page-level variables, and structured page metadata.
 
-WikiMark is a **superset** of GFM with one intentional behavioral
-change (see [section 1.3](#13-relationship-to-gfm)). Every valid GFM
-document is parseable by WikiMark. For documents that contain no
-WikiMark extensions and no relative links, a conforming WikiMark
-processor produces output identical to a conforming GFM processor.
+WikiMark is a **superset** of GFM with two intentional behavioral
+changes (see [section 1.3](#13-relationship-to-gfm)). Every valid GFM
+document is parseable by WikiMark. For most documents, a conforming
+WikiMark processor produces identical output to a conforming GFM
+processor — the exceptions are relative links and standalone images.
 
 [GFM]: https://github.github.com/gfm/
 
@@ -22,9 +22,9 @@ processor produces output identical to a conforming GFM processor.
 
 1. **Near-superset.** WikiMark extensions use syntax that has no defined
    meaning in GFM (`[[...]]`, `{{...}}`, `${...}`, `{key=value}`,
-   `|...|`). The one exception is relative links: `[text](target)`
-   without a URI scheme is treated as a wiki page link rather than a
-   filesystem path (see [section 1.3](#13-relationship-to-gfm)).
+   `|...|`). Two intentional deviations from GFM behavior: relative
+   links resolve as wiki pages, and standalone images produce `<figure>`
+   elements (see [section 1.3](#13-relationship-to-gfm)).
 
 2. **GFM first.** Where GFM already provides a feature, WikiMark uses it
    as-is. For example, WikiMark uses GFM footnotes (`[^id]`) for
@@ -93,8 +93,22 @@ their standard GFM behavior:
 - Explicit relative path: `./file` or `../file`
 - URL contains a space (from angle-bracket link definitions)
 
-This is the **only** intentional deviation from GFM. All other GFM
-constructs produce identical output. WikiMark extensions (`[[...]]`,
+#### 1.3.2 The standalone image deviation
+
+In GFM, a standalone image (`![alt](url)` as the sole content of a
+paragraph) is rendered as `<p><img ...></p>`. In WikiMark, standalone
+images are rendered as `<figure>` elements with `<figcaption>`, following
+Pandoc's convention for semantic HTML:
+
+    <figure><img src="url" alt="alt" /><figcaption>alt</figcaption></figure>
+
+Images that appear inline with other text are unaffected — they render
+as `<img>` just like GFM.
+
+#### 1.3.3 Summary
+
+These are the **only two** intentional deviations from GFM. All other
+GFM constructs produce identical output. WikiMark extensions (`[[...]]`,
 `{{...}}`, `${...}`, `{key=value}`, `|...|`, YAML frontmatter) all use
 syntax that has no defined meaning in GFM, so they do not conflict with
 any existing GFM document.
@@ -390,12 +404,12 @@ WikiMark block or inline content:
 </div>
 ````````````````````````````````
 
-#### 5.1.4 Strict superset compatibility
+#### 5.1.4 GFM compatibility
 
 A GFM processor renders callout syntax as a regular block quote with
 `[!TYPE]` as literal text. WikiMark gives it additional meaning (styled
-rendering), but the content remains accessible. This is consistent with
-the strict-superset property: the content is not lost, only enhanced.
+rendering), but the content remains accessible — the content is not
+lost, only enhanced.
 
 ---
 
@@ -876,12 +890,8 @@ Earth is a planet.
 ````````````````````````````````
 
 Implementations SHOULD collect categories and MAY render them in a
-standard location (e.g., the bottom of the page):
-
-    <nav class="wm-categories">
-      <span class="wm-category"><a href="Category:Planets">Planets</a></span>
-      <span class="wm-category"><a href="Category:Solar_System">Solar System</a></span>
-    </nav>
+standard location (e.g., the bottom of the page). The URL structure
+for category pages is implementation-defined.
 
 ### 8.7 Table of contents control
 
@@ -981,9 +991,8 @@ Implementations MAY define additional frontmatter keys.
 YAML frontmatter is not part of the GFM specification. A GFM processor
 will render `---` as a thematic break and the YAML content as a
 paragraph. Because WikiMark extracts frontmatter before GFM block parsing
-begins (phase 1), this does not violate the strict-superset property: the
-frontmatter is simply not present in the input that the GFM-compatible
-block parser sees.
+begins (phase 1), the frontmatter is simply not present in the input
+that the GFM-compatible block parser sees.
 
 ---
 
@@ -1032,15 +1041,24 @@ attributes for layout control. WikiMark does NOT introduce a separate
 file embedding syntax — standard Markdown images are the only way to
 embed media.
 
-### 10.1 Basic images (inherited from GFM)
+### 10.1 Basic images
+
+A standalone image (sole content of a paragraph) is wrapped in
+`<figure>` with `<figcaption>`:
 
 ```````````````````````````````` example
 ![A sunset](photo.jpg)
 .
-<p><img src="photo.jpg" alt="A sunset" /></p>
+<figure><img src="photo.jpg" alt="A sunset" /><figcaption>A sunset</figcaption></figure>
 ````````````````````````````````
 
-This is standard GFM behavior, unchanged.
+An inline image (with surrounding text) remains as `<img>`:
+
+```````````````````````````````` example
+See ![icon](icon.png) for details.
+.
+<p>See <img src="icon.png" alt="icon" /> for details.</p>
+````````````````````````````````
 
 ### 10.2 Presentation attributes on images
 
@@ -1050,65 +1068,66 @@ attribute block for presentation control:
 ```````````````````````````````` example
 ![A sunset](photo.jpg){width=300}
 .
-<p><img src="photo.jpg" alt="A sunset" width="300" /></p>
+<figure><img src="photo.jpg" alt="A sunset" width="300" /><figcaption>A sunset</figcaption></figure>
 ````````````````````````````````
 
 ```````````````````````````````` example
 ![A sunset](photo.jpg){width=300 height=200}
 .
-<p><img src="photo.jpg" alt="A sunset" width="300" height="200" /></p>
+<figure><img src="photo.jpg" alt="A sunset" width="300" height="200" /><figcaption>A sunset</figcaption></figure>
 ````````````````````````````````
 
-### 10.3 CSS classes
+### 10.3 Standalone images (figure wrapping)
 
-Classes are specified with a `.` prefix:
+When an image is the **sole content of a paragraph** (no surrounding
+text), it is rendered as a `<figure>` element with the alt text as the
+`<figcaption>`. This follows Pandoc's convention for standalone images
+and produces semantic HTML.
 
 ```````````````````````````````` example
-![A sunset](photo.jpg){.thumb}
+![A sunset](photo.jpg)
 .
-<figure class="thumb"><img src="photo.jpg" alt="A sunset" /><figcaption>A sunset</figcaption></figure>
+<figure><img src="photo.jpg" alt="A sunset" /><figcaption>A sunset</figcaption></figure>
 ````````````````````````````````
 
-The following class names have defined rendering behavior:
-
-| Class | Effect |
-| --- | --- |
-| `.thumb` | Reduced-size image with frame and caption |
-| `.frame` | Full-size image with frame and caption |
-| `.frameless` | Reduced-size image without frame |
-| `.border` | Thin border around the image |
-| `.align-left` | Float left |
-| `.align-right` | Float right |
-| `.align-center` | Center, no float |
-
-When `.thumb` or `.frame` is present, the image is wrapped in a
-`<figure>` element and the alt text is used as the `<figcaption>`.
+Images that appear inline with other text remain as `<img>`:
 
 ```````````````````````````````` example
-![A beautiful sunset](photo.jpg){.thumb .align-right width=300}
+Here is a ![small icon](icon.png) inline image.
 .
-<figure class="thumb align-right"><img src="photo.jpg" alt="A beautiful sunset" width="300" /><figcaption>A beautiful sunset</figcaption></figure>
+<p>Here is a <img src="icon.png" alt="small icon" /> inline image.</p>
 ````````````````````````````````
 
-### 10.4 Caption attribute
+### 10.4 CSS classes
 
-For cases where the caption should differ from the alt text:
+Classes are specified with a `.` prefix. Class names have no special
+meaning to the parser — they are passed through for CSS styling:
 
 ```````````````````````````````` example
-![Sunset over ocean](photo.jpg){.thumb caption="A beautiful sunset"}
+![A sunset](photo.jpg){.thumb .align-right width=300}
 .
-<figure class="thumb"><img src="photo.jpg" alt="Sunset over ocean" /><figcaption>A beautiful sunset</figcaption></figure>
+<figure class="thumb align-right"><img src="photo.jpg" alt="A sunset" width="300" /><figcaption>A sunset</figcaption></figure>
 ````````````````````````````````
 
-### 10.5 ID attribute
+### 10.5 Caption attribute
+
+A `caption` attribute overrides the alt text for the `<figcaption>`:
+
+```````````````````````````````` example
+![Sunset over ocean](photo.jpg){caption="A beautiful sunset"}
+.
+<figure><img src="photo.jpg" alt="Sunset over ocean" /><figcaption>A beautiful sunset</figcaption></figure>
+````````````````````````````````
+
+### 10.6 ID attribute
 
 ```````````````````````````````` example
 ![A sunset](photo.jpg){#hero-image}
 .
-<p><img src="photo.jpg" alt="A sunset" id="hero-image" /></p>
+<figure><img src="photo.jpg" alt="A sunset" id="hero-image" /><figcaption>A sunset</figcaption></figure>
 ````````````````````````````````
 
-### 10.6 Semantic annotations on images
+### 10.7 Semantic annotations on images
 
 Images MAY also carry semantic annotations using `|...|` after the
 presentation attributes (or directly after the image if no attributes):
@@ -1120,12 +1139,12 @@ presentation attributes (or directly after the image if no attributes):
 ````````````````````````````````
 
 ```````````````````````````````` example
-![Sunset](photo.jpg)|subject=sunset|
+A photo: ![Sunset](photo.jpg)|subject=sunset|
 .
-<p><img src="photo.jpg" alt="Sunset" data-wm-subject="sunset" /></p>
+<p>A photo: <img src="photo.jpg" alt="Sunset" data-wm-subject="sunset" /></p>
 ````````````````````````````````
 
-### 10.7 Multiple attribute blocks
+### 10.8 Multiple attribute blocks
 
 Multiple attribute blocks on the same element are merged. Attributes
 are combined; if the same key appears in both blocks, the later value
@@ -1137,7 +1156,7 @@ takes precedence. Classes are accumulated.
 <figure class="thumb border"><img src="photo.jpg" alt="alt" width="300" /><figcaption>alt</figcaption></figure>
 ````````````````````````````````
 
-### 10.8 Attribute syntax rules
+### 10.9 Attribute syntax rules
 
 An attribute block:
 
@@ -1676,10 +1695,10 @@ Markdown's plain-text philosophy.
 Page titles MUST be normalized to Unicode NFC (Canonical Decomposition,
 followed by Canonical Composition) before URL generation.
 
-### 13.5 Namespace normalization
+### 13.5 Namespace handling
 
-Namespace prefixes that match implementation-defined reserved namespaces
-are case-insensitive. The canonical form uses initial capitalization.
+Namespace prefix handling (case sensitivity, canonical forms, reserved
+names) is implementation-defined.
 
 ### 13.6 Forbidden characters
 
@@ -1725,9 +1744,9 @@ This is ${unclosed
 ````````````````````````````````
 
 ```````````````````````````````` example
-![alt](img.jpg){unclosed
+Text ![alt](img.jpg){unclosed here
 .
-<p><img src="img.jpg" alt="alt" />{unclosed</p>
+<p>Text <img src="img.jpg" alt="alt" />{unclosed here</p>
 ````````````````````````````````
 
 ### 14.2 Unresolved references
