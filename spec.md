@@ -70,9 +70,6 @@ WikiMark adds new syntax in positions that are unambiguous in GFM:
   meaning (`|` is only meaningful at the block level for tables).
 - YAML frontmatter (`---` delimited) is widely supported but not part of
   the GFM spec; it has no GFM meaning.
-- `#REDIRECT` as the first line of a document has no GFM meaning (GFM
-  ATX headings require a space after `#`).
-
 WikiMark redefines the behavior of one GFM construct:
 
 - **Relative links.** In GFM, `[text](target)` where `target` has no
@@ -134,9 +131,7 @@ promoted to top-level frontmatter keys (see
 
 **Phase 2: Block structure.** The remaining input is parsed line-by-line
 into a tree of block-level elements, following the GFM block-parsing
-algorithm. In addition to GFM block types, WikiMark recognizes:
-
-- [Redirect lines](#9-redirects) (section 9)
+algorithm.
 
 **Phase 3: Inline structure.** The text content of each leaf block is
 parsed into inline elements, following the GFM inline-parsing algorithm.
@@ -229,8 +224,6 @@ section 3][GFM].
 
 WikiMark adds the following block-level constructs:
 
-- **Redirect line** (leaf block): A line beginning with `#REDIRECT`
-  followed by a wiki link. See [section 9](#9-redirects).
 - **Callout** (container block): A block quote beginning with `[!TYPE]`.
   See [section 5.1](#51-callouts-admonitions).
 - **Page embed** (leaf block): `![[page]]` transcludes another page's
@@ -307,10 +300,6 @@ This is [just text] in brackets.
 WikiMark inherits GFM leaf blocks (thematic breaks, ATX headings, setext
 headings, indented code blocks, fenced code blocks, link reference
 definitions, paragraphs, blank lines, HTML blocks, and tables) unchanged.
-
-### 4.11 Redirect lines
-
-See [section 9](#9-redirects).
 
 ---
 
@@ -977,13 +966,10 @@ block parser sees.
 ## 9 Redirects
 
 A **redirect** is a page whose sole purpose is to forward readers to
-another page.
+another page. Redirects are declared in frontmatter using the `redirect`
+key.
 
 ### 9.1 Redirect syntax
-
-A redirect may be declared in two ways:
-
-**Frontmatter redirect** (RECOMMENDED):
 
 ```````````````````````````````` example
 ---
@@ -993,51 +979,25 @@ redirect: Main Page
 <p>Redirecting to <a href="Main_Page">Main Page</a>.</p>
 ````````````````````````````````
 
-**Inline redirect** (MediaWiki-compatible):
-
-```````````````````````````````` example
-#REDIRECT [[Main Page]]
-.
-<p>Redirecting to <a href="Main_Page">Main Page</a>.</p>
-````````````````````````````````
-
-The keyword `#REDIRECT` is case-insensitive:
-
-```````````````````````````````` example
-#redirect [[Main Page]]
-.
-<p>Redirecting to <a href="Main_Page">Main Page</a>.</p>
-````````````````````````````````
-
-### 9.2 Redirect constraints
-
-An inline redirect MUST be the first non-blank line of the document
-(after any frontmatter). If `#REDIRECT` appears anywhere else, it is
-treated as a regular paragraph:
-
-```````````````````````````````` example
-Some text.
-
-#REDIRECT [[Main Page]]
-.
-<p>Some text.</p>
-<p>#REDIRECT <a href="Main_Page">Main Page</a></p>
-````````````````````````````````
-
-If both a frontmatter `redirect` key and an inline `#REDIRECT` are
-present, the frontmatter value takes precedence.
-
-### 9.3 Redirect target
-
 The redirect target is [normalized](#13-normalization-rules) as a page
-title. For inline redirects, it MUST be a valid wiki link (not a piped
-link).
+title.
+
+### 9.2 Redirect with namespace
 
 ```````````````````````````````` example
-#REDIRECT [[Help:Main Page]]
+---
+redirect: Help:Main Page
+---
 .
 <p>Redirecting to <a href="Help:Main_Page">Help:Main Page</a>.</p>
 ````````````````````````````````
+
+### 9.3 Redirect behavior
+
+When a page has a `redirect` key in its frontmatter, the page body is
+ignored and replaced with a redirect notice. Implementations SHOULD
+perform the redirect automatically (e.g., via HTTP 301/302) rather than
+displaying the notice.
 
 ---
 
@@ -1786,11 +1746,8 @@ document body.
 
 ### A.3 Phase 2: Block structure
 
-Follow the GFM block-parsing algorithm with this addition:
-
-Before parsing any blocks, check if the first non-blank line matches
-`#REDIRECT\s+\[\[.*\]\]` (case-insensitive). If so, parse it as a
-redirect block.
+Follow the GFM block-parsing algorithm unchanged. Redirects are handled
+in frontmatter (phase 1), not as block-level constructs.
 
 ### A.4 Phase 3: Inline structure
 
