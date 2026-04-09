@@ -35,6 +35,7 @@ A strict superset of [GitHub Flavored Markdown](https://github.github.com/gfm/) 
 
 - `spec.md` — The specification
 - `examples/` — Example WikiMark documents
+- `tests/` — Comprehensive test suite (1,546 input/output pairs including CommonMark, GFM, and WikiMark-specific tests)
 
 ## File Extension
 

@@ -1,0 +1,30 @@
+{
+  "description": "WikiMark test suite index",
+  "suites": {
+    "commonmark": {
+      "file": "upstream/commonmark-spec.json",
+      "count": 652,
+      "description": "CommonMark 0.31.2 specification tests"
+    },
+    "gfm-spec": {
+      "file": "upstream/gfm-spec.json",
+      "count": 672,
+      "description": "GFM specification tests (includes CommonMark)"
+    },
+    "gfm-extensions": {
+      "file": "upstream/gfm-extensions.json",
+      "count": 30,
+      "description": "GFM extension tests (tables, strikethrough, autolinks, task lists)"
+    },
+    "wikimark-spec": {
+      "file": "wikimark-spec.json",
+      "count": 92,
+      "description": "WikiMark specification examples"
+    },
+    "wikimark-extra": {
+      "file": "wikimark-extra.json",
+      "count": 100,
+      "description": "Additional edge cases and regression tests"
+    }
+  }
+}

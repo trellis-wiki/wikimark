@@ -1,0 +1,802 @@
+[
+  {
+    "markdown": "[[Alpha]][[Beta]]\n",
+    "html": "<p><a href=\"Alpha\">Alpha</a><a href=\"Beta\">Beta</a></p>\n",
+    "example": 1,
+    "section": "Wiki links — adjacent",
+    "source": "wikimark-extra",
+    "description": "Two wiki links with no space between them"
+  },
+  {
+    "markdown": "[[Alpha]] [[Beta]] [[Gamma]]\n",
+    "html": "<p><a href=\"Alpha\">Alpha</a> <a href=\"Beta\">Beta</a> <a href=\"Gamma\">Gamma</a></p>\n",
+    "example": 2,
+    "section": "Wiki links — adjacent",
+    "source": "wikimark-extra",
+    "description": "Three wiki links separated by spaces"
+  },
+  {
+    "markdown": "[[a b c d e]]\n",
+    "html": "<p><a href=\"A_b_c_d_e\">a b c d e</a></p>\n",
+    "example": 3,
+    "section": "Wiki links — normalization",
+    "source": "wikimark-extra",
+    "description": "Multi-word target with first-letter capitalization and underscore conversion"
+  },
+  {
+    "markdown": "[[  leading]]\n",
+    "html": "<p><a href=\"Leading\">leading</a></p>\n",
+    "example": 4,
+    "section": "Wiki links — normalization",
+    "source": "wikimark-extra",
+    "description": "Leading whitespace stripped from target"
+  },
+  {
+    "markdown": "[[trailing  ]]\n",
+    "html": "<p><a href=\"Trailing\">trailing</a></p>\n",
+    "example": 5,
+    "section": "Wiki links — normalization",
+    "source": "wikimark-extra",
+    "description": "Trailing whitespace stripped from target"
+  },
+  {
+    "markdown": "[[Main_Page|go home]]\n",
+    "html": "<p><a href=\"Main_Page\">go home</a></p>\n",
+    "example": 6,
+    "section": "Wiki links — piped with underscore",
+    "source": "wikimark-extra",
+    "description": "Underscore in target with piped display text"
+  },
+  {
+    "markdown": "[[Main Page|*italic* and **bold**]]\n",
+    "html": "<p><a href=\"Main_Page\"><em>italic</em> and <strong>bold</strong></a></p>\n",
+    "example": 7,
+    "section": "Wiki links — inline formatting in display text",
+    "source": "wikimark-extra",
+    "description": "Emphasis and strong emphasis in wiki link display text"
+  },
+  {
+    "markdown": "[[Main Page|`code`]]\n",
+    "html": "<p><a href=\"Main_Page\"><code>code</code></a></p>\n",
+    "example": 8,
+    "section": "Wiki links — inline formatting in display text",
+    "source": "wikimark-extra",
+    "description": "Code span in wiki link display text"
+  },
+  {
+    "markdown": "[[Main Page|text with ~~strike~~]]\n",
+    "html": "<p><a href=\"Main_Page\">text with <del>strike</del></a></p>\n",
+    "example": 9,
+    "section": "Wiki links — inline formatting in display text",
+    "source": "wikimark-extra",
+    "description": "Strikethrough in wiki link display text"
+  },
+  {
+    "markdown": "Text before [[link]] text after.\n",
+    "html": "<p>Text before <a href=\"Link\">link</a> text after.</p>\n",
+    "example": 10,
+    "section": "Wiki links — in paragraph context",
+    "source": "wikimark-extra",
+    "description": "Wiki link surrounded by text in a paragraph"
+  },
+  {
+    "markdown": "- [[Item One]]\n- [[Item Two]]\n",
+    "html": "<ul>\n<li><a href=\"Item_One\">Item One</a></li>\n<li><a href=\"Item_Two\">Item Two</a></li>\n</ul>\n",
+    "example": 11,
+    "section": "Wiki links — in list items",
+    "source": "wikimark-extra",
+    "description": "Wiki links inside unordered list items"
+  },
+  {
+    "markdown": "## [[Section Link]]\n",
+    "html": "<h2><a href=\"Section_Link\">Section Link</a></h2>\n",
+    "example": 12,
+    "section": "Wiki links — in headings",
+    "source": "wikimark-extra",
+    "description": "Wiki link inside a heading"
+  },
+  {
+    "markdown": "> [[Quoted Link]]\n",
+    "html": "<blockquote>\n<p><a href=\"Quoted_Link\">Quoted Link</a></p>\n</blockquote>\n",
+    "example": 13,
+    "section": "Wiki links — in block quotes",
+    "source": "wikimark-extra",
+    "description": "Wiki link inside a block quote"
+  },
+  {
+    "markdown": "[[Help:FAQ|frequently asked questions]]\n",
+    "html": "<p><a href=\"Help:FAQ\">frequently asked questions</a></p>\n",
+    "example": 14,
+    "section": "Wiki links — namespace with display text",
+    "source": "wikimark-extra",
+    "description": "Namespace-prefixed wiki link with piped display text"
+  },
+  {
+    "markdown": "---\ntitle: Test\nauthor: Nobody\n---\n\nTitle: ${title}, Author: ${author}\n",
+    "html": "<p>Title: Test, Author: Nobody</p>\n",
+    "example": 15,
+    "section": "Variables — multiple in one line",
+    "source": "wikimark-extra",
+    "description": "Multiple variable references on the same line"
+  },
+  {
+    "markdown": "---\na:\n  b:\n    c: deep\n---\n\n${a.b.c}\n",
+    "html": "<p>deep</p>\n",
+    "example": 16,
+    "section": "Variables — deeply nested dot notation",
+    "source": "wikimark-extra",
+    "description": "Three-level deep dot notation variable access"
+  },
+  {
+    "markdown": "---\nlist:\n  - alpha\n  - beta\n  - gamma\n---\n\nFirst: ${list.0}, Third: ${list.2}\n",
+    "html": "<p>First: alpha, Third: gamma</p>\n",
+    "example": 17,
+    "section": "Variables — array index access",
+    "source": "wikimark-extra",
+    "description": "Accessing multiple array elements by index"
+  },
+  {
+    "markdown": "---\ntitle: Hello\n---\n\n${title} ${title} ${title}\n",
+    "html": "<p>Hello Hello Hello</p>\n",
+    "example": 18,
+    "section": "Variables — repeated reference",
+    "source": "wikimark-extra",
+    "description": "Same variable referenced multiple times"
+  },
+  {
+    "markdown": "${nofront}\n",
+    "html": "<p></p>\n",
+    "example": 19,
+    "section": "Variables — no frontmatter",
+    "source": "wikimark-extra",
+    "description": "Variable reference with no frontmatter at all"
+  },
+  {
+    "markdown": "---\ntitle: World\n---\n\n# Hello ${title}\n",
+    "html": "<h1>Hello World</h1>\n",
+    "example": 20,
+    "section": "Variables — in headings",
+    "source": "wikimark-extra",
+    "description": "Variable reference inside a heading"
+  },
+  {
+    "markdown": "---\nurl: Main Page\n---\n\n[[${url}]]\n",
+    "html": "<p><a href=\"Main_Page\">Main Page</a></p>\n",
+    "example": 21,
+    "section": "Variables — inside wiki link",
+    "source": "wikimark-extra",
+    "description": "Variable reference used as wiki link target"
+  },
+  {
+    "markdown": "The price is $100 and $200.\n",
+    "html": "<p>The price is $100 and $200.</p>\n",
+    "example": 22,
+    "section": "Dollar sign — not special alone",
+    "source": "wikimark-extra",
+    "description": "Dollar signs not followed by { are literal"
+  },
+  {
+    "markdown": "$$not special$$\n",
+    "html": "<p>$$not special$$</p>\n",
+    "example": 23,
+    "section": "Dollar sign — double dollar",
+    "source": "wikimark-extra",
+    "description": "Double dollar signs are literal (no LaTeX conflict)"
+  },
+  {
+    "markdown": "$\n",
+    "html": "<p>$</p>\n",
+    "example": 24,
+    "section": "Dollar sign — lone dollar",
+    "source": "wikimark-extra",
+    "description": "A lone dollar sign at end of line is literal"
+  },
+  {
+    "markdown": "\\${escaped}\n",
+    "html": "<p>${escaped}</p>\n",
+    "example": 25,
+    "section": "Escaping — variable reference",
+    "source": "wikimark-extra",
+    "description": "Backslash-escaped variable reference is literal"
+  },
+  {
+    "markdown": "\\[\\[escaped link]]\n",
+    "html": "<p>[[escaped link]]</p>\n",
+    "example": 26,
+    "section": "Escaping — wiki link",
+    "source": "wikimark-extra",
+    "description": "Backslash-escaped wiki link brackets are literal"
+  },
+  {
+    "markdown": "\\{\\{escaped template}}\n",
+    "html": "<p>{{escaped template}}</p>\n",
+    "example": 27,
+    "section": "Escaping — template",
+    "source": "wikimark-extra",
+    "description": "Backslash-escaped template braces are literal"
+  },
+  {
+    "markdown": "`[[code]]` and `{{template}}` and `${var}`\n",
+    "html": "<p><code>[[code]]</code> and <code>{{template}}</code> and <code>${var}</code></p>\n",
+    "example": 28,
+    "section": "Escaping — code spans suppress parsing",
+    "source": "wikimark-extra",
+    "description": "WikiMark constructs inside code spans are not parsed"
+  },
+  {
+    "markdown": "```\n[[not a link]]\n{{not a template}}\n${not a variable}\n```\n",
+    "html": "<pre><code>[[not a link]]\n{{not a template}}\n${not a variable}\n</code></pre>\n",
+    "example": 29,
+    "section": "Escaping — fenced code blocks suppress parsing",
+    "source": "wikimark-extra",
+    "description": "WikiMark constructs inside fenced code blocks are not parsed"
+  },
+  {
+    "markdown": "> [!NOTE]\n> First line.\n>\n> Second paragraph.\n",
+    "html": "<div class=\"wm-callout wm-callout-note\">\n<p class=\"wm-callout-title\">Note</p>\n<p>First line.</p>\n<p>Second paragraph.</p>\n</div>\n",
+    "example": 30,
+    "section": "Callouts — multi-paragraph",
+    "source": "wikimark-extra",
+    "description": "Callout with multiple paragraphs"
+  },
+  {
+    "markdown": "> [!TIP]\n> - Item one\n> - Item two\n",
+    "html": "<div class=\"wm-callout wm-callout-tip\">\n<p class=\"wm-callout-title\">Tip</p>\n<ul>\n<li>Item one</li>\n<li>Item two</li>\n</ul>\n</div>\n",
+    "example": 31,
+    "section": "Callouts — with list",
+    "source": "wikimark-extra",
+    "description": "Callout containing a list"
+  },
+  {
+    "markdown": "> [!IMPORTANT]\n> Important information here.\n",
+    "html": "<div class=\"wm-callout wm-callout-important\">\n<p class=\"wm-callout-title\">Important</p>\n<p>Important information here.</p>\n</div>\n",
+    "example": 32,
+    "section": "Callouts — important type",
+    "source": "wikimark-extra",
+    "description": "Callout with IMPORTANT type"
+  },
+  {
+    "markdown": "> [!CAUTION]\n> Be very careful.\n",
+    "html": "<div class=\"wm-callout wm-callout-caution\">\n<p class=\"wm-callout-title\">Caution</p>\n<p>Be very careful.</p>\n</div>\n",
+    "example": 33,
+    "section": "Callouts — caution type",
+    "source": "wikimark-extra",
+    "description": "Callout with CAUTION type"
+  },
+  {
+    "markdown": "> [!CUSTOM]\n> Custom callout type.\n",
+    "html": "<div class=\"wm-callout wm-callout-custom\">\n<p class=\"wm-callout-title\">Custom</p>\n<p>Custom callout type.</p>\n</div>\n",
+    "example": 34,
+    "section": "Callouts — unrecognized type",
+    "source": "wikimark-extra",
+    "description": "Callout with unrecognized type rendered as generic"
+  },
+  {
+    "markdown": "> [!note]\n> Lowercase type.\n",
+    "html": "<div class=\"wm-callout wm-callout-note\">\n<p class=\"wm-callout-title\">Note</p>\n<p>Lowercase type.</p>\n</div>\n",
+    "example": 35,
+    "section": "Callouts — case insensitive type",
+    "source": "wikimark-extra",
+    "description": "Callout types should be case-insensitive"
+  },
+  {
+    "markdown": "![img](a.jpg){.thumb .align-left width=400 height=300}\n",
+    "html": "<figure class=\"thumb align-left\"><img src=\"a.jpg\" alt=\"img\" width=\"400\" height=\"300\" /><figcaption>img</figcaption></figure>\n",
+    "example": 36,
+    "section": "Images — multiple classes and attributes",
+    "source": "wikimark-extra",
+    "description": "Image with multiple classes and multiple size attributes"
+  },
+  {
+    "markdown": "![img](a.jpg){.frame}\n",
+    "html": "<figure class=\"frame\"><img src=\"a.jpg\" alt=\"img\" /><figcaption>img</figcaption></figure>\n",
+    "example": 37,
+    "section": "Images — frame class",
+    "source": "wikimark-extra",
+    "description": "Image with .frame class wraps in figure"
+  },
+  {
+    "markdown": "![img](a.jpg){.frameless width=200}\n",
+    "html": "<p><img src=\"a.jpg\" alt=\"img\" class=\"frameless\" width=\"200\" /></p>\n",
+    "example": 38,
+    "section": "Images — frameless class",
+    "source": "wikimark-extra",
+    "description": "Image with .frameless class has no figure wrapper"
+  },
+  {
+    "markdown": "![img](a.jpg){.border}\n",
+    "html": "<p><img src=\"a.jpg\" alt=\"img\" class=\"border\" /></p>\n",
+    "example": 39,
+    "section": "Images — border class",
+    "source": "wikimark-extra",
+    "description": "Image with .border class"
+  },
+  {
+    "markdown": "![img](a.jpg){.thumb caption=\"A different caption\"}\n",
+    "html": "<figure class=\"thumb\"><img src=\"a.jpg\" alt=\"img\" /><figcaption>A different caption</figcaption></figure>\n",
+    "example": 40,
+    "section": "Images — caption overrides alt",
+    "source": "wikimark-extra",
+    "description": "Caption attribute overrides alt text for figcaption"
+  },
+  {
+    "markdown": "![](empty-alt.jpg)\n",
+    "html": "<p><img src=\"empty-alt.jpg\" alt=\"\" /></p>\n",
+    "example": 41,
+    "section": "Images — empty alt text",
+    "source": "wikimark-extra",
+    "description": "Image with empty alt text"
+  },
+  {
+    "markdown": "![](empty-alt.jpg){.thumb}\n",
+    "html": "<figure class=\"thumb\"><img src=\"empty-alt.jpg\" alt=\"\" /><figcaption></figcaption></figure>\n",
+    "example": 42,
+    "section": "Images — empty alt text with thumb",
+    "source": "wikimark-extra",
+    "description": "Thumb image with empty alt text gets empty figcaption"
+  },
+  {
+    "markdown": "[link](https://example.com){.external}\n",
+    "html": "<p><a href=\"https://example.com\" class=\"external\">link</a></p>\n",
+    "example": 43,
+    "section": "Presentation attributes — on standard links",
+    "source": "wikimark-extra",
+    "description": "Presentation attributes on a standard Markdown link"
+  },
+  {
+    "markdown": "[link](https://example.com){#my-link .special}\n",
+    "html": "<p><a href=\"https://example.com\" id=\"my-link\" class=\"special\">link</a></p>\n",
+    "example": 44,
+    "section": "Presentation attributes — id and class on links",
+    "source": "wikimark-extra",
+    "description": "ID and class attributes on a standard link"
+  },
+  {
+    "markdown": "[text]{.a .b .c}\n",
+    "html": "<p><span class=\"a b c\">text</span></p>\n",
+    "example": 45,
+    "section": "Spans — multiple classes",
+    "source": "wikimark-extra",
+    "description": "Span with multiple CSS classes"
+  },
+  {
+    "markdown": "[text]{#myid}\n",
+    "html": "<p><span id=\"myid\">text</span></p>\n",
+    "example": 46,
+    "section": "Spans — id attribute",
+    "source": "wikimark-extra",
+    "description": "Span with an ID attribute"
+  },
+  {
+    "markdown": "[text]{data-x=1 data-y=2}\n",
+    "html": "<p><span data-x=\"1\" data-y=\"2\">text</span></p>\n",
+    "example": 47,
+    "section": "Spans — custom data attributes",
+    "source": "wikimark-extra",
+    "description": "Span with custom data attributes"
+  },
+  {
+    "markdown": "[text]{.cls key=\"value with spaces\"}\n",
+    "html": "<p><span class=\"cls\" key=\"value with spaces\">text</span></p>\n",
+    "example": 48,
+    "section": "Spans — quoted attribute values",
+    "source": "wikimark-extra",
+    "description": "Span with quoted attribute value containing spaces"
+  },
+  {
+    "markdown": "[The **bold** word]{.highlight}\n",
+    "html": "<p><span class=\"highlight\">The <strong>bold</strong> word</span></p>\n",
+    "example": 49,
+    "section": "Spans — inline formatting inside",
+    "source": "wikimark-extra",
+    "description": "Span containing inline formatting"
+  },
+  {
+    "markdown": "[Paris]|capital country=France|\n",
+    "html": "<p><span data-wm-property=\"capital\" data-wm-country=\"France\">Paris</span></p>\n",
+    "example": 50,
+    "section": "Semantic annotations — bare property plus key-value",
+    "source": "wikimark-extra",
+    "description": "Annotation with both a bare property name and a key-value pair"
+  },
+  {
+    "markdown": "[100]|property=age value=100 type=Number|\n",
+    "html": "<p><span data-wm-property=\"age\" data-wm-value=\"100\" data-wm-type=\"Number\">100</span></p>\n",
+    "example": 51,
+    "section": "Semantic annotations — multiple key-value pairs",
+    "source": "wikimark-extra",
+    "description": "Annotation with multiple key-value pairs"
+  },
+  {
+    "markdown": "[text]|property=\"value with spaces\"|\n",
+    "html": "<p><span data-wm-property=\"value with spaces\">text</span></p>\n",
+    "example": 52,
+    "section": "Semantic annotations — quoted values",
+    "source": "wikimark-extra",
+    "description": "Annotation with quoted value containing spaces"
+  },
+  {
+    "markdown": "[[Paris|City of Light]]{.capital}|capital country=France|\n",
+    "html": "<p><a href=\"Paris\" class=\"capital\" data-wm-property=\"capital\" data-wm-country=\"France\">City of Light</a></p>\n",
+    "example": 53,
+    "section": "Semantic annotations — full modifier chain on wiki link",
+    "source": "wikimark-extra",
+    "description": "Wiki link with display text, presentation attributes, and semantic annotations"
+  },
+  {
+    "markdown": "[link](https://example.com){.ext}|source=web|\n",
+    "html": "<p><a href=\"https://example.com\" class=\"ext\" data-wm-source=\"web\">link</a></p>\n",
+    "example": 54,
+    "section": "Semantic annotations — full modifier chain on MD link",
+    "source": "wikimark-extra",
+    "description": "Standard link with presentation attributes and semantic annotations"
+  },
+  {
+    "markdown": "[]|hidden-property=\"secret\"|\n",
+    "html": "<p><span data-wm-hidden-property=\"secret\" class=\"wm-silent\"></span></p>\n",
+    "example": 55,
+    "section": "Semantic annotations — silent with key-value",
+    "source": "wikimark-extra",
+    "description": "Silent annotation with a key-value property"
+  },
+  {
+    "markdown": "[[Page]]||\n",
+    "html": "<p><a href=\"Page\">Page</a></p>\n",
+    "example": 56,
+    "section": "Semantic annotations — empty annotation is no-op",
+    "source": "wikimark-extra",
+    "description": "Empty annotation block is ignored"
+  },
+  {
+    "markdown": "This has no | annotation | here.\n",
+    "html": "<p>This has no | annotation | here.</p>\n",
+    "example": 57,
+    "section": "Semantic annotations — pipes in plain text",
+    "source": "wikimark-extra",
+    "description": "Pipes in regular text are not parsed as annotations"
+  },
+  {
+    "markdown": "---\nredirect: Other Page\n---\n",
+    "html": "<p>Redirecting to <a href=\"Other_Page\">Other Page</a>.</p>\n",
+    "example": 58,
+    "section": "Redirects — frontmatter redirect",
+    "source": "wikimark-extra",
+    "description": "Redirect via frontmatter key"
+  },
+  {
+    "markdown": "#REDIRECT [[Help:Main]]\n",
+    "html": "<p>Redirecting to <a href=\"Help:Main\">Help:Main</a>.</p>\n",
+    "example": 59,
+    "section": "Redirects — namespace target",
+    "source": "wikimark-extra",
+    "description": "Inline redirect to a namespaced page"
+  },
+  {
+    "markdown": "#Redirect [[Page]]\n",
+    "html": "<p>Redirecting to <a href=\"Page\">Page</a>.</p>\n",
+    "example": 60,
+    "section": "Redirects — mixed case keyword",
+    "source": "wikimark-extra",
+    "description": "Redirect keyword is case-insensitive (mixed case)"
+  },
+  {
+    "markdown": "Content first.\n\n#REDIRECT [[Page]]\n",
+    "html": "<p>Content first.</p>\n<p>#REDIRECT <a href=\"Page\">Page</a></p>\n",
+    "example": 61,
+    "section": "Redirects — not first line",
+    "source": "wikimark-extra",
+    "description": "REDIRECT not on first line is treated as paragraph text"
+  },
+  {
+    "markdown": "[[<script>]]\n",
+    "html": "<p>[[<script>]]</p>\n",
+    "example": 62,
+    "section": "Edge cases — forbidden characters in wiki link",
+    "source": "wikimark-extra",
+    "description": "Wiki link target with forbidden < character is literal text"
+  },
+  {
+    "markdown": "[[page#section]]\n",
+    "html": "<p>[[page#section]]</p>\n",
+    "example": 63,
+    "section": "Edge cases — forbidden characters in wiki link",
+    "source": "wikimark-extra",
+    "description": "Wiki link target with # character is literal text"
+  },
+  {
+    "markdown": "[[page{curly}]]\n",
+    "html": "<p>[[page{curly}]]</p>\n",
+    "example": 64,
+    "section": "Edge cases — forbidden characters in wiki link",
+    "source": "wikimark-extra",
+    "description": "Wiki link target with curly braces is literal text"
+  },
+  {
+    "markdown": "[[]]\n",
+    "html": "<p>[[]]</p>\n",
+    "example": 65,
+    "section": "Edge cases — empty wiki link",
+    "source": "wikimark-extra",
+    "description": "Empty wiki link is literal text"
+  },
+  {
+    "markdown": "${}\n",
+    "html": "<p></p>\n",
+    "example": 66,
+    "section": "Edge cases — empty variable reference",
+    "source": "wikimark-extra",
+    "description": "Empty variable reference resolves to empty string"
+  },
+  {
+    "markdown": "{{  }}\n",
+    "html": "<p><span class=\"wm-error\">{{  }}</span></p>\n",
+    "example": 67,
+    "section": "Edge cases — whitespace-only template name",
+    "source": "wikimark-extra",
+    "description": "Template with whitespace-only name is an error"
+  },
+  {
+    "markdown": "Start [[link]] middle {{template}} end ${var}\n",
+    "html": "<p>Start <a href=\"Link\">link</a> middle <span class=\"wm-error\">{{template}}</span> end </p>\n",
+    "example": 68,
+    "section": "Edge cases — all three construct types in one line",
+    "source": "wikimark-extra",
+    "description": "Wiki link, template, and variable reference on same line"
+  },
+  {
+    "markdown": "[[Page]] and [regular](https://example.com) and ![img](photo.jpg)\n",
+    "html": "<p><a href=\"Page\">Page</a> and <a href=\"https://example.com\">regular</a> and <img src=\"photo.jpg\" alt=\"img\" /></p>\n",
+    "example": 69,
+    "section": "Edge cases — mixed link types",
+    "source": "wikimark-extra",
+    "description": "Wiki link, MD link, and image all in one line"
+  },
+  {
+    "markdown": "**[[Bold Link]]**\n",
+    "html": "<p><strong><a href=\"Bold_Link\">Bold Link</a></strong></p>\n",
+    "example": 70,
+    "section": "Edge cases — wiki link inside emphasis",
+    "source": "wikimark-extra",
+    "description": "Wiki link nested inside strong emphasis"
+  },
+  {
+    "markdown": "*[[Italic Link]]*\n",
+    "html": "<p><em><a href=\"Italic_Link\">Italic Link</a></em></p>\n",
+    "example": 71,
+    "section": "Edge cases — wiki link inside emphasis",
+    "source": "wikimark-extra",
+    "description": "Wiki link nested inside emphasis"
+  },
+  {
+    "markdown": "[[link\nbroken]]\n",
+    "html": "<p>[[link\nbroken]]</p>\n",
+    "example": 72,
+    "section": "Edge cases — wiki link spanning lines",
+    "source": "wikimark-extra",
+    "description": "Wiki link target cannot span multiple lines"
+  },
+  {
+    "markdown": "{{template\nbroken}}\n",
+    "html": "<p>{{template\nbroken}}</p>\n",
+    "example": 73,
+    "section": "Edge cases — template spanning lines",
+    "source": "wikimark-extra",
+    "description": "Template transclusion cannot span multiple lines"
+  },
+  {
+    "markdown": "${variable\nbroken}\n",
+    "html": "<p>${variable\nbroken}</p>\n",
+    "example": 74,
+    "section": "Edge cases — variable spanning lines",
+    "source": "wikimark-extra",
+    "description": "Variable reference cannot span multiple lines"
+  },
+  {
+    "markdown": "[[[[nested]]]]\n",
+    "html": "<p>[[<a href=\"Nested\">nested</a>]]</p>\n",
+    "example": 75,
+    "section": "Edge cases — nested double brackets",
+    "source": "wikimark-extra",
+    "description": "Double-nested brackets: inner wiki link parsed, outer brackets literal"
+  },
+  {
+    "markdown": "{{outer arg=\"contains \\\"quotes\\\"\"}}\n",
+    "html": "<p>Result with quotes.</p>\n",
+    "example": 76,
+    "section": "Edge cases — escaped quotes in template args",
+    "source": "wikimark-extra",
+    "description": "Template argument with escaped quotes inside quoted value"
+  },
+  {
+    "markdown": "| Col A | Col B |\n| --- | --- |\n| [[Page]] | text |\n",
+    "html": "<table>\n<thead>\n<tr>\n<th>Col A</th>\n<th>Col B</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><a href=\"Page\">Page</a></td>\n<td>text</td>\n</tr>\n</tbody>\n</table>\n",
+    "example": 77,
+    "section": "Tables — basic wiki link in cell",
+    "source": "wikimark-extra",
+    "description": "Simple wiki link inside a table cell"
+  },
+  {
+    "markdown": "| Col A | Col B |\n| --- | --- |\n| [[Page|label]] | ${title} |\n",
+    "html": "<table>\n<thead>\n<tr>\n<th>Col A</th>\n<th>Col B</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><a href=\"Page\">label</a></td>\n<td></td>\n</tr>\n</tbody>\n</table>\n",
+    "example": 78,
+    "section": "Tables — piped wiki link in cell",
+    "source": "wikimark-extra",
+    "description": "Piped wiki link in table cell; pipe inside [[ ]] is not a cell boundary"
+  },
+  {
+    "markdown": "---\ncategories:\n  - Science\n  - Physics\n  - Astronomy\ntags:\n  - featured\n---\n\nContent here.\n",
+    "html": "<p>Content here.</p>\n",
+    "example": 79,
+    "section": "Frontmatter — complex metadata",
+    "source": "wikimark-extra",
+    "description": "Frontmatter with multiple categories and tags does not produce visible output"
+  },
+  {
+    "markdown": "---\ntoc: false\n---\n\n## Heading One\n\n## Heading Two\n",
+    "html": "<h2>Heading One</h2>\n<h2>Heading Two</h2>\n",
+    "example": 80,
+    "section": "Frontmatter — toc suppressed",
+    "source": "wikimark-extra",
+    "description": "TOC suppressed via frontmatter"
+  },
+  {
+    "markdown": "---\ntitle: Page\nredirect: Target\n---\n\n#REDIRECT [[Other]]\n",
+    "html": "<p>Redirecting to <a href=\"Target\">Target</a>.</p>\n",
+    "example": 81,
+    "section": "Redirects — frontmatter takes precedence",
+    "source": "wikimark-extra",
+    "description": "When both frontmatter redirect and inline redirect exist, frontmatter wins"
+  },
+  {
+    "markdown": "---\ntitle: Test\n---\n\n**${title}** is the page.\n",
+    "html": "<p><strong>Test</strong> is the page.</p>\n",
+    "example": 82,
+    "section": "Variables — inside emphasis",
+    "source": "wikimark-extra",
+    "description": "Variable reference inside bold text"
+  },
+  {
+    "markdown": "---\ntitle: Test\n---\n\n- ${title}\n- Other\n",
+    "html": "<ul>\n<li>Test</li>\n<li>Other</li>\n</ul>\n",
+    "example": 83,
+    "section": "Variables — in list items",
+    "source": "wikimark-extra",
+    "description": "Variable reference inside a list item"
+  },
+  {
+    "markdown": "---\ntitle: Test\n---\n\n> ${title} quoted\n",
+    "html": "<blockquote>\n<p>Test quoted</p>\n</blockquote>\n",
+    "example": 84,
+    "section": "Variables — in block quotes",
+    "source": "wikimark-extra",
+    "description": "Variable reference inside a block quote"
+  },
+  {
+    "markdown": "![[missing-page]]\n",
+    "html": "<p><span class=\"wm-error\">![[missing-page]]</span></p>\n",
+    "example": 85,
+    "section": "Page embeds — missing page",
+    "source": "wikimark-extra",
+    "description": "Page embed of nonexistent page shows error"
+  },
+  {
+    "markdown": "[a]{.x}[b]{.y}\n",
+    "html": "<p><span class=\"x\">a</span><span class=\"y\">b</span></p>\n",
+    "example": 86,
+    "section": "Spans — adjacent spans",
+    "source": "wikimark-extra",
+    "description": "Two spans immediately adjacent to each other"
+  },
+  {
+    "markdown": "[text]{}\n",
+    "html": "<p><span>text</span></p>\n",
+    "example": 87,
+    "section": "Spans — empty attribute block",
+    "source": "wikimark-extra",
+    "description": "Span with empty attribute block produces a plain span"
+  },
+  {
+    "markdown": "Some text with [[link]]{.cls}|prop| in the middle.\n",
+    "html": "<p>Some text with <a href=\"Link\" class=\"cls\" data-wm-property=\"prop\">link</a> in the middle.</p>\n",
+    "example": 88,
+    "section": "Modifier chains — wiki link in paragraph",
+    "source": "wikimark-extra",
+    "description": "Wiki link with both modifiers embedded in paragraph text"
+  },
+  {
+    "markdown": "![alt](img.jpg){.thumb}|subject=test| and [[Page]]|type=article|\n",
+    "html": "<figure class=\"thumb\" data-wm-subject=\"test\"><img src=\"img.jpg\" alt=\"alt\" /><figcaption>alt</figcaption></figure><p> and <a href=\"Page\" data-wm-type=\"article\">Page</a></p>\n",
+    "example": 89,
+    "section": "Modifier chains — multiple elements with modifiers",
+    "source": "wikimark-extra",
+    "description": "Image and wiki link both with full modifier chains"
+  },
+  {
+    "markdown": "---\ninputs:\n  name:\n    default: World\n  greeting:\n    default: Hello\n---\n\n${greeting}, ${name}!\n",
+    "html": "<p>Hello, World!</p>\n",
+    "example": 90,
+    "section": "Inputs — defaults used when no args provided",
+    "source": "wikimark-extra",
+    "description": "Template inputs with defaults resolve correctly as a standalone page"
+  },
+  {
+    "markdown": "---\ndata:\n  items:\n    - name: Alpha\n      value: 1\n    - name: Beta\n      value: 2\n---\n\n${data.items.0.name}: ${data.items.0.value}\n",
+    "html": "<p>Alpha: 1</p>\n",
+    "example": 91,
+    "section": "Variables — deep array-of-objects access",
+    "source": "wikimark-extra",
+    "description": "Dot notation into array of objects"
+  },
+  {
+    "markdown": "---\ntitle: \"Quotes \\\"inside\\\" title\"\n---\n\n${title}\n",
+    "html": "<p>Quotes \"inside\" title</p>\n",
+    "example": 92,
+    "section": "Variables — escaped quotes in frontmatter value",
+    "source": "wikimark-extra",
+    "description": "Frontmatter value with escaped quotes"
+  },
+  {
+    "markdown": "{{greeting name=\"Alice\"}} and {{greeting name=\"Bob\"}}\n",
+    "html": "<p>Hello, Alice! and Hello, Bob!</p>\n",
+    "example": 93,
+    "section": "Templates — multiple on same line",
+    "source": "wikimark-extra",
+    "description": "Two template transclusions on the same line"
+  },
+  {
+    "markdown": "---\ntitle: My Page\n---\n\n[[${title}|go to my page]]\n",
+    "html": "<p><a href=\"My_Page\">go to my page</a></p>\n",
+    "example": 94,
+    "section": "Variables — inside wiki link with pipe",
+    "source": "wikimark-extra",
+    "description": "Variable reference as wiki link target with display text"
+  },
+  {
+    "markdown": "> [!WARNING] **Bold title**\n> Content here.\n",
+    "html": "<div class=\"wm-callout wm-callout-warning\">\n<p class=\"wm-callout-title\"><strong>Bold title</strong></p>\n<p>Content here.</p>\n</div>\n",
+    "example": 95,
+    "section": "Callouts — inline formatting in custom title",
+    "source": "wikimark-extra",
+    "description": "Callout custom title with inline formatting"
+  },
+  {
+    "markdown": "> [!NOTE]\n> > Nested quote inside callout.\n",
+    "html": "<div class=\"wm-callout wm-callout-note\">\n<p class=\"wm-callout-title\">Note</p>\n<blockquote>\n<p>Nested quote inside callout.</p>\n</blockquote>\n</div>\n",
+    "example": 96,
+    "section": "Callouts — nested block quote",
+    "source": "wikimark-extra",
+    "description": "Block quote nested inside a callout"
+  },
+  {
+    "markdown": "![img](a.jpg){.thumb}{.align-center}{width=500}\n",
+    "html": "<figure class=\"thumb align-center\"><img src=\"a.jpg\" alt=\"img\" width=\"500\" /><figcaption>img</figcaption></figure>\n",
+    "example": 97,
+    "section": "Images — three attribute blocks merged",
+    "source": "wikimark-extra",
+    "description": "Three consecutive attribute blocks are merged"
+  },
+  {
+    "markdown": "![img](a.jpg){width=100}{width=200}\n",
+    "html": "<p><img src=\"a.jpg\" alt=\"img\" width=\"200\" /></p>\n",
+    "example": 98,
+    "section": "Images — later attribute overrides earlier",
+    "source": "wikimark-extra",
+    "description": "When same attribute appears in multiple blocks, later wins"
+  },
+  {
+    "markdown": "Standalone [text] is not special.\n\nBut [text]{.cls} is a span.\n\nAnd [text](url) is a link.\n",
+    "html": "<p>Standalone [text] is not special.</p>\n<p>But <span class=\"cls\">text</span> is a span.</p>\n<p>And <a href=\"url\">text</a> is a link.</p>\n",
+    "example": 99,
+    "section": "Bracket disambiguation — three forms",
+    "source": "wikimark-extra",
+    "description": "Bare [text], [text]{attr}, and [text](url) each behave differently"
+  },
+  {
+    "markdown": "Normal text, nothing special.\n",
+    "html": "<p>Normal text, nothing special.</p>\n",
+    "example": 100,
+    "section": "GFM passthrough — plain paragraph",
+    "source": "wikimark-extra",
+    "description": "Plain text with no WikiMark features is pure GFM passthrough"
+  }
+]
