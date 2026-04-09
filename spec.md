@@ -458,20 +458,22 @@ An unclosed wiki link is treated as literal text:
 ### 7.2 Wiki-style Markdown links (custom display text)
 
 To display custom text for a wiki link, use standard Markdown link syntax
-with a wiki page target (no protocol prefix):
+with a wiki page target (no protocol prefix). Use underscores for spaces
+in the target, following standard Markdown URL rules:
 
 ```````````````````````````````` example
-[go home](Main Page)
+[go home](Main_Page)
 .
 <p><a href="Main_Page">go home</a></p>
 ````````````````````````````````
 
-A Markdown link whose URL does not contain `://` is treated as a wiki
-link. The target is [normalized](#13-normalization-rules) the same way
-as a `[[...]]` wiki link target.
+A Markdown link whose URL does not have an RFC 3986 scheme and does not
+start with `#`, `/`, `./`, or `../` is treated as a wiki link. The
+target is [normalized](#13-normalization-rules) the same way as a
+`[[...]]` wiki link target.
 
 ```````````````````````````````` example
-[go **home**](Main Page)
+[go **home**](Main_Page)
 .
 <p><a href="Main_Page">go <strong>home</strong></a></p>
 ````````````````````````````````

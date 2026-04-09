@@ -48,7 +48,7 @@
     "description": "Wiki-style Markdown link with underscore in target"
   },
   {
-    "markdown": "[*italic* and **bold**](Main Page)\n",
+    "markdown": "[*italic* and **bold**](Main_Page)\n",
     "html": "<p><a href=\"Main_Page\"><em>italic</em> and <strong>bold</strong></a></p>\n",
     "example": 7,
     "section": "Wiki-style links — inline formatting in display text",
@@ -56,7 +56,7 @@
     "description": "Emphasis and strong emphasis in wiki-style link display text"
   },
   {
-    "markdown": "[`code`](Main Page)\n",
+    "markdown": "[`code`](Main_Page)\n",
     "html": "<p><a href=\"Main_Page\"><code>code</code></a></p>\n",
     "example": 8,
     "section": "Wiki-style links — inline formatting in display text",
@@ -64,7 +64,7 @@
     "description": "Code span in wiki-style link display text"
   },
   {
-    "markdown": "[text with ~~strike~~](Main Page)\n",
+    "markdown": "[text with ~~strike~~](Main_Page)\n",
     "html": "<p><a href=\"Main_Page\">text with <del>strike</del></a></p>\n",
     "example": 9,
     "section": "Wiki-style links — inline formatting in display text",
@@ -744,7 +744,7 @@
     "description": "Two template transclusions on the same line"
   },
   {
-    "markdown": "---\ntitle: My Page\n---\n\n[go to my page](${title})\n",
+    "markdown": "---\ntitle: My_Page\n---\n\n[go to my page](${title})\n",
     "html": "<p><a href=\"My_Page\">go to my page</a></p>\n",
     "example": 94,
     "section": "Variables — inside wiki-style link target",
