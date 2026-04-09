@@ -4,7 +4,7 @@ A strict superset of [GitHub Flavored Markdown](https://github.github.com/gfm/) 
 
 ## Status
 
-**Draft specification (v0.3) in progress.** Not yet stable.
+**Draft specification (v0.4) in progress.** Not yet stable.
 
 ## Design Principles
 
@@ -40,6 +40,20 @@ A strict superset of [GitHub Flavored Markdown](https://github.github.com/gfm/) 
 
 WikiMark files use the `.wm` extension.
 
+## Acknowledgments
+
+WikiMark builds on the work of several projects:
+
+- **[Markdown](https://daringfireball.net/projects/markdown/)** — John Gruber's original lightweight markup language (2004).
+- **[CommonMark](https://commonmark.org/)** — A strongly defined, highly compatible specification of Markdown by John MacFarlane et al. (CC-BY-SA 4.0).
+- **[GitHub Flavored Markdown (GFM)](https://github.github.com/gfm/)** — GitHub's strict superset of CommonMark, which WikiMark in turn extends.
+
+WikiMark also draws on conventions established by [MediaWiki](https://www.mediawiki.org/), [Pandoc](https://pandoc.org/), and [Obsidian](https://obsidian.md/).
+
 ## License
 
-CC-BY-SA 4.0
+This specification is licensed under the [Creative Commons Attribution-ShareAlike 4.0 International License][cc-by-sa].
+
+See [LICENSE](LICENSE) for the full text.
+
+[cc-by-sa]: https://creativecommons.org/licenses/by-sa/4.0/
