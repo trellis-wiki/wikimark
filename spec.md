@@ -73,6 +73,19 @@ WikiMark adds new syntax in positions that are unambiguous in GFM:
 - `#REDIRECT` as the first line of a document has no GFM meaning (GFM
   ATX headings require a space after `#`).
 
+WikiMark redefines the behavior of one GFM construct:
+
+- **Relative links.** In GFM, `[text](target)` where `target` has no
+  URI scheme creates a relative filesystem link. In WikiMark, such links
+  are **wiki page links**: the target is a page name within the wiki's
+  namespace. There are no relative filesystem links in a wiki context —
+  the wiki namespace is the context. Links with an RFC 3986 scheme
+  (`https:`, `mailto:`, etc.), fragment anchors (`#`), or explicit
+  path prefixes (`/`, `./`, `../`) retain their standard GFM meaning.
+
+This is the only intentional deviation from GFM behavior. All other GFM
+constructs are preserved unchanged.
+
 ### 1.4 Conventions
 
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
@@ -458,8 +471,10 @@ An unclosed wiki link is treated as literal text:
 ### 7.2 Wiki-style Markdown links (custom display text)
 
 To display custom text for a wiki link, use standard Markdown link syntax
-with a wiki page target (no protocol prefix). Use underscores for spaces
-in the target, following standard Markdown URL rules:
+with a wiki page target. In WikiMark, all Markdown links without a URI
+scheme resolve to wiki pages — there are no relative filesystem links in
+a wiki context (see [section 1.3](#13-relationship-to-gfm)). Use
+underscores for spaces in the target:
 
 ```````````````````````````````` example
 [go home](Main_Page)
@@ -467,10 +482,14 @@ in the target, following standard Markdown URL rules:
 <p><a href="Main_Page">go home</a></p>
 ````````````````````````````````
 
-A Markdown link whose URL does not have an RFC 3986 scheme and does not
-start with `#`, `/`, `./`, or `../` is treated as a wiki link. The
-target is [normalized](#13-normalization-rules) the same way as a
-`[[...]]` wiki link target.
+A Markdown link is treated as a wiki link unless the URL:
+- Has an RFC 3986 scheme (`https:`, `mailto:`, `tel:`, etc.)
+- Starts with `#` (fragment anchor)
+- Starts with `/` (absolute path)
+- Starts with `./` or `../` (explicit relative path)
+
+Wiki targets are [normalized](#13-normalization-rules) the same way as
+`[[...]]` wiki link targets.
 
 ```````````````````````````````` example
 [go **home**](Main_Page)
@@ -484,6 +503,20 @@ Links with a protocol are standard GFM links, not wiki links:
 [external](https://example.com)
 .
 <p><a href="https://example.com">external</a></p>
+````````````````````````````````
+
+Anchors and explicit paths are also standard links, not wiki links:
+
+```````````````````````````````` example
+[section](#introduction)
+.
+<p><a href="#introduction">section</a></p>
+````````````````````````````````
+
+```````````````````````````````` example
+[email](mailto:user@example.com)
+.
+<p><a href="mailto:user@example.com">email</a></p>
 ````````````````````````````````
 
 ### 7.3 Namespace-prefixed links
