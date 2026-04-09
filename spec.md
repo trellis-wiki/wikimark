@@ -202,6 +202,10 @@ forming the two-character sequence `${`. A lone `$` is literal text.
 This preserves compatibility with LaTeX math syntax:
 
 ```````````````````````````````` example
+---
+title: Earth
+---
+
 The equation $x^{2}$ uses ${title}.
 .
 <p>The equation $x^{2}$ uses Earth.</p>
@@ -830,6 +834,10 @@ The `$` character alone is not special — only `${` triggers variable
 parsing (see [section 2.6](#26-the--character)):
 
 ```````````````````````````````` example
+---
+title: Earth
+---
+
 The cost is $50 and ${title} is the page.
 .
 <p>The cost is $50 and Earth is the page.</p>
