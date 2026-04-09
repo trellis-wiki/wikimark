@@ -4,7 +4,7 @@ A strict superset of [GitHub Flavored Markdown](https://github.github.com/gfm/) 
 
 ## Status
 
-**Draft specification (v0.4) in progress.** Not yet stable.
+**Draft specification (v0.5) in progress.** Not yet stable.
 
 ## Design Principles
 
@@ -23,7 +23,7 @@ A strict superset of [GitHub Flavored Markdown](https://github.github.com/gfm/) 
 
 ## Features
 
-- **Wiki links**: `[[Page]]`, `[[Page|display text]]`, namespaces, interwiki
+- **Wiki links**: `[[Page]]`, `[display text](Page)`, namespaces, interwiki
 - **YAML frontmatter**: Categories, TOC control, page variables, template inputs
 - **Page variables**: `${title}`, `${star.name}`, `${moons.0}` — dot notation into frontmatter
 - **Images**: Standard `![alt](url)` extended with Pandoc attributes `{.thumb width=300}`

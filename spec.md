@@ -1,6 +1,6 @@
 # WikiMark Specification
 
-Version 0.4 (Draft)
+Version 0.5 (Draft)
 
 ## 1 Introduction
 
@@ -229,8 +229,7 @@ WikiMark adds the following inline constructs:
 
 - **Variable reference**: `${key}` or `${path.to.key}`. See
   [section 8.2](#82-variable-references).
-- **Wiki link**: `[[target]]` or `[[target|display]]`. See
-  [section 7](#7-wiki-links).
+- **Wiki link**: `[[target]]`. See [section 7](#7-wiki-links).
 - **Template transclusion**: `{{name args}}`. See
   [section 11](#11-templates).
 - **Semantic annotation**: `|property|` or `|property key=value|`
@@ -414,7 +413,7 @@ another page within the same wiki or knowledge base.
 ### 7.1 Basic wiki links
 
 A wiki link consists of an opening `[[`, a **link target**, and a closing
-`]]`. The link target MUST NOT be empty, MUST NOT contain `]]`, `|`, `[`,
+`]]`. The link target MUST NOT be empty, MUST NOT contain `]]`, `[`,
 or `]` characters, and MUST NOT contain line endings.
 
 The link target is [normalized](#13-normalization-rules) to produce a URL.
@@ -456,41 +455,33 @@ An unclosed wiki link is treated as literal text:
 <p>[[Main Page</p>
 ````````````````````````````````
 
-### 7.2 Piped wiki links (display text)
+### 7.2 Wiki-style Markdown links (custom display text)
 
-A wiki link MAY contain a `|` character separating the link target from
-display text. The display text is rendered instead of the link target.
-The display text MAY contain other inline constructs (emphasis, code
-spans, etc.) but MUST NOT contain wiki links.
+To display custom text for a wiki link, use standard Markdown link syntax
+with a wiki page target (no protocol prefix):
 
 ```````````````````````````````` example
-[[Main Page|home]]
+[go home](Main Page)
 .
-<p><a href="Main_Page">home</a></p>
+<p><a href="Main_Page">go home</a></p>
 ````````````````````````````````
 
+A Markdown link whose URL does not contain `://` is treated as a wiki
+link. The target is [normalized](#13-normalization-rules) the same way
+as a `[[...]]` wiki link target.
+
 ```````````````````````````````` example
-[[Main Page|go **home**]]
+[go **home**](Main Page)
 .
 <p><a href="Main_Page">go <strong>home</strong></a></p>
 ````````````````````````````````
 
-Only the first `|` is the separator; subsequent `|` characters are part
-of the display text:
+Links with a protocol are standard GFM links, not wiki links:
 
 ```````````````````````````````` example
-[[Main Page|a|b]]
+[external](https://example.com)
 .
-<p><a href="Main_Page">a|b</a></p>
-````````````````````````````````
-
-A piped wiki link with empty display text uses the link target as display
-text (the pipe is ignored):
-
-```````````````````````````````` example
-[[Main Page|]]
-.
-<p><a href="Main_Page">Main Page</a></p>
+<p><a href="https://example.com">external</a></p>
 ````````````````````````````````
 
 ### 7.3 Namespace-prefixed links
@@ -504,8 +495,11 @@ followed by `:`. The namespace becomes part of the URL path.
 <p><a href="Help:Editing">Help:Editing</a></p>
 ````````````````````````````````
 
+For custom display text with namespaced targets, use wiki-style Markdown
+links:
+
 ```````````````````````````````` example
-[[Help:Editing|how to edit]]
+[how to edit](Help:Editing)
 .
 <p><a href="Help:Editing">how to edit</a></p>
 ````````````````````````````````
@@ -559,14 +553,13 @@ Wiki links inside code spans are not parsed:
 
 ### 7.7 Wiki links in GFM tables
 
-Inside GFM table cells, the `|` inside a wiki link is the display-text
-separator, not a cell boundary. The wiki link MUST close with `]]` before
-the cell boundary `|` is recognized.
+Wiki links work inside GFM table cells without conflict, since wiki
+links do not use `|`:
 
 ```````````````````````````````` example
 | Column A | Column B |
 | --- | --- |
-| [[Page|display]] | text |
+| [[Page]] | text |
 .
 <table>
 <thead>
@@ -577,7 +570,7 @@ the cell boundary `|` is recognized.
 </thead>
 <tbody>
 <tr>
-<td><a href="Page">display</a></td>
+<td><a href="Page">Page</a></td>
 <td>text</td>
 </tr>
 </tbody>
@@ -1474,7 +1467,7 @@ Annotations MAY contain `key=value` pairs for richer metadata:
 ````````````````````````````````
 
 ```````````````````````````````` example
-[[Paris|City of Light]]|capital|
+[City of Light](Paris)|capital|
 .
 <p><a href="Paris" data-wm-property="capital">City of Light</a></p>
 ````````````````````````````````
@@ -1812,8 +1805,9 @@ When constructs overlap or nest ambiguously:
    WikiMark constructs are parsed inside them.
 
 2. **`[[...]]` is greedy**: once `[[` is encountered, the parser scans
-   for the matching `]]`, consuming `|` as the display-text separator.
-   GFM inline formatting is parsed within display text only.
+   for the matching `]]`. The content is the page target only (no `|`
+   separator). Wiki links do not contain display text; use wiki-style
+   Markdown links (`[display](target)`) for custom display text.
 
 3. **`{{...}}` is greedy**: once `{{` is encountered, the parser scans
    for the matching `}}`. Nested `{{...}}` pairs are tracked for proper

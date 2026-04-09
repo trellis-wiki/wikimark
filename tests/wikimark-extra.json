@@ -40,36 +40,36 @@
     "description": "Trailing whitespace stripped from target"
   },
   {
-    "markdown": "[[Main_Page|go home]]\n",
+    "markdown": "[go home](Main_Page)\n",
     "html": "<p><a href=\"Main_Page\">go home</a></p>\n",
     "example": 6,
     "section": "Wiki links — piped with underscore",
     "source": "wikimark-extra",
-    "description": "Underscore in target with piped display text"
+    "description": "Wiki-style Markdown link with underscore in target"
   },
   {
-    "markdown": "[[Main Page|*italic* and **bold**]]\n",
+    "markdown": "[*italic* and **bold**](Main Page)\n",
     "html": "<p><a href=\"Main_Page\"><em>italic</em> and <strong>bold</strong></a></p>\n",
     "example": 7,
-    "section": "Wiki links — inline formatting in display text",
+    "section": "Wiki-style links — inline formatting in display text",
     "source": "wikimark-extra",
-    "description": "Emphasis and strong emphasis in wiki link display text"
+    "description": "Emphasis and strong emphasis in wiki-style link display text"
   },
   {
-    "markdown": "[[Main Page|`code`]]\n",
+    "markdown": "[`code`](Main Page)\n",
     "html": "<p><a href=\"Main_Page\"><code>code</code></a></p>\n",
     "example": 8,
-    "section": "Wiki links — inline formatting in display text",
+    "section": "Wiki-style links — inline formatting in display text",
     "source": "wikimark-extra",
-    "description": "Code span in wiki link display text"
+    "description": "Code span in wiki-style link display text"
   },
   {
-    "markdown": "[[Main Page|text with ~~strike~~]]\n",
+    "markdown": "[text with ~~strike~~](Main Page)\n",
     "html": "<p><a href=\"Main_Page\">text with <del>strike</del></a></p>\n",
     "example": 9,
-    "section": "Wiki links — inline formatting in display text",
+    "section": "Wiki-style links — inline formatting in display text",
     "source": "wikimark-extra",
-    "description": "Strikethrough in wiki link display text"
+    "description": "Strikethrough in wiki-style link display text"
   },
   {
     "markdown": "Text before [[link]] text after.\n",
@@ -104,12 +104,12 @@
     "description": "Wiki link inside a block quote"
   },
   {
-    "markdown": "[[Help:FAQ|frequently asked questions]]\n",
+    "markdown": "[frequently asked questions](Help:FAQ)\n",
     "html": "<p><a href=\"Help:FAQ\">frequently asked questions</a></p>\n",
     "example": 14,
-    "section": "Wiki links — namespace with display text",
+    "section": "Wiki-style links — namespace with display text",
     "source": "wikimark-extra",
-    "description": "Namespace-prefixed wiki link with piped display text"
+    "description": "Wiki-style Markdown link with namespaced target"
   },
   {
     "markdown": "---\ntitle: Test\nauthor: Nobody\n---\n\nTitle: ${title}, Author: ${author}\n",
@@ -416,12 +416,12 @@
     "description": "Annotation with quoted value containing spaces"
   },
   {
-    "markdown": "[[Paris|City of Light]]{.capital}|capital country=France|\n",
+    "markdown": "[City of Light](Paris){.capital}|capital country=France|\n",
     "html": "<p><a href=\"Paris\" class=\"capital\" data-wm-property=\"capital\" data-wm-country=\"France\">City of Light</a></p>\n",
     "example": 53,
-    "section": "Semantic annotations — full modifier chain on wiki link",
+    "section": "Semantic annotations — full modifier chain on wiki-style link",
     "source": "wikimark-extra",
-    "description": "Wiki link with display text, presentation attributes, and semantic annotations"
+    "description": "Wiki-style link with display text, presentation attributes, and semantic annotations"
   },
   {
     "markdown": "[link](https://example.com){.ext}|source=web|\n",
@@ -616,12 +616,12 @@
     "description": "Simple wiki link inside a table cell"
   },
   {
-    "markdown": "| Col A | Col B |\n| --- | --- |\n| [[Page|label]] | ${title} |\n",
+    "markdown": "| Col A | Col B |\n| --- | --- |\n| [label](Page) | ${title} |\n",
     "html": "<table>\n<thead>\n<tr>\n<th>Col A</th>\n<th>Col B</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><a href=\"Page\">label</a></td>\n<td></td>\n</tr>\n</tbody>\n</table>\n",
     "example": 78,
-    "section": "Tables — piped wiki link in cell",
+    "section": "Tables — wiki-style link in cell",
     "source": "wikimark-extra",
-    "description": "Piped wiki link in table cell; pipe inside [[ ]] is not a cell boundary"
+    "description": "Wiki-style Markdown link in table cell"
   },
   {
     "markdown": "---\ncategories:\n  - Science\n  - Physics\n  - Astronomy\ntags:\n  - featured\n---\n\nContent here.\n",
@@ -744,12 +744,12 @@
     "description": "Two template transclusions on the same line"
   },
   {
-    "markdown": "---\ntitle: My Page\n---\n\n[[${title}|go to my page]]\n",
+    "markdown": "---\ntitle: My Page\n---\n\n[go to my page](${title})\n",
     "html": "<p><a href=\"My_Page\">go to my page</a></p>\n",
     "example": 94,
-    "section": "Variables — inside wiki link with pipe",
+    "section": "Variables — inside wiki-style link target",
     "source": "wikimark-extra",
-    "description": "Variable reference as wiki link target with display text"
+    "description": "Variable reference as wiki-style link target with display text"
   },
   {
     "markdown": "> [!WARNING] **Bold title**\n> Content here.\n",

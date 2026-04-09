@@ -40,10 +40,10 @@ ${subtitle}
 ## Wiki Links
 
 - Basic: [[Main Page]]
-- Piped: [[Main Page|home]]
+- Custom display: [home](Main Page)
 - Namespace: [[Help:Editing]]
 - Interwiki: [[wikipedia:Markdown]]
-- With emphasis: [[Main Page|go **home**]]
+- With emphasis: [go **home**](Main Page)
 - Escaped: \[\[not a link]]
 - In code: `[[not a link]]`
 
@@ -107,7 +107,7 @@ Silent annotation: []|category-type="Sovereign state"|
 
 | Name | Value |
 | --- | --- |
-| [[Page|display]] | 42 |
+| [[Page]] | 42 |
 | normal | **bold** |
 
 ### Tables with semantic data (escaped pipes)
