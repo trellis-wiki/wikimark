@@ -1118,5 +1118,45 @@
     "section": "Escaping — variable reference",
     "source": "wikimark-extra",
     "description": "An unmatched backtick run does not stop variable expansion"
+  },
+  {
+    "markdown": "_a_\\{\n",
+    "html": "<p><em>a</em>{</p>\n",
+    "example": 141,
+    "section": "Escaping — modifier characters",
+    "source": "wikimark-extra",
+    "description": "Emphasis closes before an escaped brace (it counts as punctuation)"
+  },
+  {
+    "markdown": "\\{_a_\n",
+    "html": "<p>{<em>a</em></p>\n",
+    "example": 142,
+    "section": "Escaping — modifier characters",
+    "source": "wikimark-extra",
+    "description": "Emphasis opens after an escaped brace"
+  },
+  {
+    "markdown": "\\![[A]]\n",
+    "html": "<p>!<a href=\"A\">A</a></p>\n",
+    "example": 143,
+    "section": "Escaping — modifier characters",
+    "source": "wikimark-extra",
+    "description": "An escaped ! before a wiki link is not an embed"
+  },
+  {
+    "markdown": "see\\![a](b)\n",
+    "html": "<p>see!<a href=\"b\">a</a></p>\n",
+    "example": 144,
+    "section": "Escaping — modifier characters",
+    "source": "wikimark-extra",
+    "description": "An escaped ! before a link is not an image"
+  },
+  {
+    "markdown": "real ᳀ *x*᳅ \\[\n",
+    "html": "<p>real ᳀ <em>x</em>᳅ [</p>\n",
+    "example": 145,
+    "section": "Escaping — modifier characters",
+    "source": "wikimark-extra",
+    "description": "Characters in U+1CC0..U+1CC7 pass through unchanged"
   }
 ]
