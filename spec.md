@@ -245,6 +245,23 @@ In this example, `$x^{2}$` is literal text (the `$` is not followed by
 `{` in a way that forms a valid variable reference), while `${title}`
 is a variable reference.
 
+### 2.7 Backslash escapes
+
+A backslash-escaped character is literal text for every WikiMark
+construct, exactly as for GFM inlines. In particular `\[`, `\]`, `\{`,
+`\}` and `\|` never open or close a wiki link, template, span,
+presentation attribute block or semantic annotation, even where the
+unescaped character would attach to a preceding element. One escaped
+character is enough: `\{{x}}` is literal text, as is `\[x]{.c}`.
+Escapes have no effect inside code spans, code blocks, autolinks and raw
+HTML, where the backslash is kept.
+
+```````````````````````````````` example
+[x](y)\|p| and \[x\]{.c}
+.
+<p><a href="y">x</a>|p| and [x]{.c}</p>
+````````````````````````````````
+
 ---
 
 ## 3 Blocks and inlines

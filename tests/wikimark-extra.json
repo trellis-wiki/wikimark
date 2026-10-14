@@ -934,5 +934,157 @@
     "section": "Templates — multi-line with nested wiki-links",
     "source": "wikimark-extra",
     "description": "Combined: multi-line call WITH nested wiki-links in arg values (T9.1 + multi-line). The error span echoes back the call with newlines collapsed to spaces and the [[...]] syntax preserved."
+  },
+  {
+    "markdown": "\\[x\\]{.c}\n",
+    "html": "<p>[x]{.c}</p>\n",
+    "example": 118,
+    "section": "Escaping — modifier characters",
+    "source": "wikimark-extra",
+    "description": "Escaped brackets are not a span"
+  },
+  {
+    "markdown": "\\[x\\]|p|\n",
+    "html": "<p>[x]|p|</p>\n",
+    "example": 119,
+    "section": "Escaping — modifier characters",
+    "source": "wikimark-extra",
+    "description": "Escaped brackets are not an annotated span"
+  },
+  {
+    "markdown": "[x](y)\\{.c}\n",
+    "html": "<p><a href=\"y\">x</a>{.c}</p>\n",
+    "example": 120,
+    "section": "Escaping — modifier characters",
+    "source": "wikimark-extra",
+    "description": "Escaped brace after a link is not an attribute block"
+  },
+  {
+    "markdown": "[x](y)\\|p|\n",
+    "html": "<p><a href=\"y\">x</a>|p|</p>\n",
+    "example": 121,
+    "section": "Escaping — modifier characters",
+    "source": "wikimark-extra",
+    "description": "Escaped pipe after a link is not an annotation"
+  },
+  {
+    "markdown": "[[a]]\\|p|\n",
+    "html": "<p><a href=\"a\">a</a>|p|</p>\n",
+    "example": 122,
+    "section": "Escaping — modifier characters",
+    "source": "wikimark-extra",
+    "description": "Escaped pipe after a wiki link is not an annotation"
+  },
+  {
+    "markdown": "[[a]]\\{.c}\n",
+    "html": "<p><a href=\"a\">a</a>{.c}</p>\n",
+    "example": 123,
+    "section": "Escaping — modifier characters",
+    "source": "wikimark-extra",
+    "description": "Escaped brace after a wiki link is not an attribute block"
+  },
+  {
+    "markdown": "\\{{x}}\n",
+    "html": "<p>{{x}}</p>\n",
+    "example": 124,
+    "section": "Escaping — modifier characters",
+    "source": "wikimark-extra",
+    "description": "One escaped brace is enough to suppress a template"
+  },
+  {
+    "markdown": "[\\[x]]\n",
+    "html": "<p>[[x]]</p>\n",
+    "example": 125,
+    "section": "Escaping — modifier characters",
+    "source": "wikimark-extra",
+    "description": "An escaped second bracket suppresses a wiki link"
+  },
+  {
+    "markdown": "\\\\[x]{.c}\n",
+    "html": "<p>\\<span class=\"c\">x</span></p>\n",
+    "example": 126,
+    "section": "Escaping — modifier characters",
+    "source": "wikimark-extra",
+    "description": "An escaped backslash does not escape the bracket after it"
+  },
+  {
+    "markdown": "`\\[x\\]` and \\[x\\]\n",
+    "html": "<p><code>\\[x\\]</code> and [x]</p>\n",
+    "example": 127,
+    "section": "Escaping — modifier characters",
+    "source": "wikimark-extra",
+    "description": "Backslashes stay in code spans"
+  },
+  {
+    "markdown": "<span title=\"\\[\">x</span>\n",
+    "html": "<p><span title=\"\\[\">x</span></p>\n",
+    "example": 128,
+    "section": "Escaping — modifier characters",
+    "source": "wikimark-extra",
+    "description": "Backslashes stay in raw HTML"
+  },
+  {
+    "markdown": "[a\\]b](u)\n",
+    "html": "<p><a href=\"u\">a]b</a></p>\n",
+    "example": 129,
+    "section": "Escaping — modifier characters",
+    "source": "wikimark-extra",
+    "description": "Escaped bracket in link text"
+  },
+  {
+    "markdown": "[a\\[b]{.c}\n",
+    "html": "<p><span class=\"c\">a[b</span></p>\n",
+    "example": 130,
+    "section": "Escaping — modifier characters",
+    "source": "wikimark-extra",
+    "description": "Escaped bracket inside a span"
+  },
+  {
+    "markdown": "[1 < 2 & \"q\"]{.c}\n",
+    "html": "<p><span class=\"c\">1 &lt; 2 &amp; &quot;q&quot;</span></p>\n",
+    "example": 131,
+    "section": "Escaping — modifier characters",
+    "source": "wikimark-extra",
+    "description": "Span text is HTML-escaped"
+  },
+  {
+    "markdown": "| a |\n|---|\n| `x\\|y` |\n",
+    "html": "<table>\n<thead>\n<tr>\n<th>a</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><code>x|y</code></td>\n</tr>\n</tbody>\n</table>\n",
+    "example": 132,
+    "section": "Escaping — modifier characters",
+    "source": "wikimark-extra",
+    "description": "Escaped pipe in a code span in a table cell"
+  },
+  {
+    "markdown": "> \\[!NOTE]\n> hi\n",
+    "html": "<blockquote>\n<p>[!NOTE]\nhi</p>\n</blockquote>\n",
+    "example": 133,
+    "section": "Escaping — modifier characters",
+    "source": "wikimark-extra",
+    "description": "Escaped bracket is not a callout marker"
+  },
+  {
+    "markdown": "[a]{.x} [b *c*]{.y}\n",
+    "html": "<p><span class=\"x\">a</span> <span class=\"y\">b <em>c</em></span></p>\n",
+    "example": 134,
+    "section": "Spans — formatting inside",
+    "source": "wikimark-extra",
+    "description": "A simple span and a span with formatting in one paragraph"
+  },
+  {
+    "markdown": "pre [a *b* c]{.x} [y\n",
+    "html": "<p>pre <span class=\"x\">a <em>b</em> c</span> [y</p>\n",
+    "example": 135,
+    "section": "Spans — formatting inside",
+    "source": "wikimark-extra",
+    "description": "Span with formatting followed by an unclosed bracket"
+  },
+  {
+    "markdown": "}[>{{}}]{}\n",
+    "html": "<p>}<span>&gt;<span class=\"wm-error\">{{}}</span></span></p>\n",
+    "example": 136,
+    "section": "Spans — formatting inside",
+    "source": "wikimark-extra",
+    "description": "Span around an empty template (regression: use after free)"
   }
 ]
