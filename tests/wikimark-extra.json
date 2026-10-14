@@ -1086,5 +1086,37 @@
     "section": "Spans — formatting inside",
     "source": "wikimark-extra",
     "description": "Span around an empty template (regression: use after free)"
+  },
+  {
+    "markdown": "`{{` x }}\n",
+    "html": "<p><code>{{</code> x }}</p>\n",
+    "example": 137,
+    "section": "Escaping — code spans suppress parsing",
+    "source": "wikimark-extra",
+    "description": "Template braces inside a code span do not open a template"
+  },
+  {
+    "markdown": "# ` {{ [^1] `, x}}\n",
+    "html": "<h1><code>{{ [^1]</code>, x}}</h1>\n",
+    "example": 138,
+    "section": "Escaping — code spans suppress parsing",
+    "source": "wikimark-extra",
+    "description": "Brackets in code after unpaired template braces are kept"
+  },
+  {
+    "markdown": "\\` ${a} `\n",
+    "html": "<p>`  `</p>\n",
+    "example": 139,
+    "section": "Escaping — variable reference",
+    "source": "wikimark-extra",
+    "description": "An escaped backtick does not open a code span for variables"
+  },
+  {
+    "markdown": "`` x ${a}\n",
+    "html": "<p>`` x</p>\n",
+    "example": 140,
+    "section": "Escaping — variable reference",
+    "source": "wikimark-extra",
+    "description": "An unmatched backtick run does not stop variable expansion"
   }
 ]
