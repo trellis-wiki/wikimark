@@ -1158,5 +1158,29 @@
     "section": "Escaping — modifier characters",
     "source": "wikimark-extra",
     "description": "Characters in U+1CC0..U+1CC7 pass through unchanged"
+  },
+  {
+    "markdown": "![a](x.png){.thumb caption=\"Say \\\"cheese\\\" now\"}\n",
+    "html": "<figure class=\"thumb\"><img src=\"x.png\" alt=\"a\" /><figcaption>Say &quot;cheese&quot; now</figcaption></figure>\n",
+    "example": 146,
+    "section": "Images — escaped quote in caption",
+    "source": "wikimark-extra",
+    "description": "Escaped quotes inside a quoted attribute value"
+  },
+  {
+    "markdown": "![a \\[b\\]](x.png){.thumb}\n",
+    "html": "<figure class=\"thumb\"><img src=\"x.png\" alt=\"a [b]\" /><figcaption>a [b]</figcaption></figure>\n",
+    "example": 147,
+    "section": "Images — escaped alt text",
+    "source": "wikimark-extra",
+    "description": "Escapes in the alt text of an image with attributes"
+  },
+  {
+    "markdown": "![a](x.png){caption=\"1 < 2 & \\\"q\\\"\"}\n",
+    "html": "<figure><img src=\"x.png\" alt=\"a\" /><figcaption>1 &lt; 2 &amp; &quot;q&quot;</figcaption></figure>\n",
+    "example": 148,
+    "section": "Images — caption escaping",
+    "source": "wikimark-extra",
+    "description": "Captions are HTML-escaped"
   }
 ]
