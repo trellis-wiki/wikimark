@@ -1182,5 +1182,37 @@
     "section": "Images — caption escaping",
     "source": "wikimark-extra",
     "description": "Captions are HTML-escaped"
+  },
+  {
+    "markdown": "{{nosuch a=*bold* b=_x_}}\n",
+    "html": "<p><span class=\"wm-error\">{{nosuch a=*bold* b=_x_}}</span></p>\n",
+    "example": 149,
+    "section": "Templates — call interior",
+    "source": "wikimark-extra",
+    "description": "Emphasis markers inside a call are part of the call"
+  },
+  {
+    "markdown": "{{nosuch a=\"x \\\"y\\\" z\"}}\n",
+    "html": "<p><span class=\"wm-error\">{{nosuch a=\"x \\\"y\\\" z\"}}</span></p>\n",
+    "example": 150,
+    "section": "Templates — call interior",
+    "source": "wikimark-extra",
+    "description": "Backslashes inside a call reach the template as written"
+  },
+  {
+    "markdown": "{{nosuch <b>}}\n",
+    "html": "<p><span class=\"wm-error\">{{nosuch &lt;b&gt;}}</span></p>\n",
+    "example": 151,
+    "section": "Templates — call interior",
+    "source": "wikimark-extra",
+    "description": "The error display is HTML-escaped"
+  },
+  {
+    "markdown": "    {{indented}} code\n",
+    "html": "<pre><code>{{indented}} code\n</code></pre>\n",
+    "example": 152,
+    "section": "Templates — call interior",
+    "source": "wikimark-extra",
+    "description": "A call in an indented code block stays as written"
   }
 ]
